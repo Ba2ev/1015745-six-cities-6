@@ -4,11 +4,6 @@ import PlaceCard from '../place-card/place-card';
 
 const Places = ({places}) => {
 
-  const cards = places.map((place) => {
-    const {id, ...data} = place;
-    return <PlaceCard key={id} data={data} />;
-  });
-
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
@@ -29,7 +24,7 @@ const Places = ({places}) => {
         </ul>
       </form>
       <div className="cities__places-list places__list tabs__content">
-        { cards }
+        { places.map(({id, ...data}) => <PlaceCard key={id} data={data} />) }
       </div>
     </section>
   );

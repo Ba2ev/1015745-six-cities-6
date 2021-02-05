@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Places from '../places/places';
+import Places from '../../components/places/places';
 
-const Page = ({places}) => {
+const MainPage = ({places}) => {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -79,7 +79,7 @@ const Page = ({places}) => {
   );
 };
 
-Page.propTypes = {
+MainPage.propTypes = {
   places: PropTypes.arrayOf(
       PropTypes.shape(
           {
@@ -96,4 +96,4 @@ Page.propTypes = {
   ).isRequired
 };
 
-export default Page;
+export default MainPage;

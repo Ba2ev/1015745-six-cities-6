@@ -5,28 +5,11 @@ const RATING_STEP = 20;
 const Card = ({data}) => {
   const {isPremium, imageName, price, isFavourite, rating, title, type} = data;
 
-  const PremiumLabel = () => {
-    return (
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>
-    );
-  };
-
-  const BookmarkButton = () => {
-    return (
-      <button className={`place-card__bookmark-button ${isFavourite ? `place-card__bookmark-button--active` : ``} button`} type="button">
-        <svg className="place-card__bookmark-icon" width="18" height="19">
-          <use xlinkHref="#icon-bookmark"></use>
-        </svg>
-        <span className="visually-hidden">{isFavourite ? `In bookmarks` : `To bookmarks`}</span>
-      </button>
-    );
-  };
-
   return (
     <article className="cities__place-card place-card">
-      {isPremium ? <PremiumLabel /> : null}
+      {isPremium && <div className="place-card__mark">
+        <span>Premium</span>
+      </div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
           <img className="place-card__image" src={`img/${imageName}.jpg`} width="260" height="200" alt="Place image"/>
@@ -38,7 +21,12 @@ const Card = ({data}) => {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <BookmarkButton />
+          <button className={`place-card__bookmark-button ${isFavourite ? `place-card__bookmark-button--active` : ``} button`} type="button">
+            <svg className="place-card__bookmark-icon" width="18" height="19">
+              <use xlinkHref="#icon-bookmark"></use>
+            </svg>
+            <span className="visually-hidden">{isFavourite ? `In bookmarks` : `To bookmarks`}</span>
+          </button>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

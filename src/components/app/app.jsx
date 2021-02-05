@@ -1,10 +1,10 @@
 import React from 'react';
-import Page from '../page/page';
+import MainPage from '../../pages/main-page/main-page';
 import PropTypes from 'prop-types';
 
 const App = ({places}) => {
   return (
-    <Page places={places}/>
+    <MainPage places={places}/>
   );
 };
 
