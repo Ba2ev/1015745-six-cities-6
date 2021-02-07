@@ -1,10 +1,34 @@
 import React from 'react';
-import MainPage from '../../pages/main-page/main-page';
 import PropTypes from 'prop-types';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import MainPage from '../../pages/main-page/main-page';
+import SignIn from './../../pages/sign-in/sing-in';
+import Favourites from './../../pages/favourites/favourites';
+import Room from './../../pages/room/room';
+import NotFoundPage from './../../pages/not-found-page/not-found-page';
+
 
 const App = ({places}) => {
   return (
-    <MainPage places={places}/>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          <MainPage places={places}/>
+        </Route>
+        <Route exact path="/login">
+          <SignIn/>
+        </Route>
+        <Route excat path="/favourites">
+          <Favourites/>
+        </Route>
+        <Route exact path="/offer/:id?">
+          <Room />
+        </Route>
+        <Route>
+          <NotFoundPage />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 };
 
