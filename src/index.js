@@ -1,6 +1,6 @@
 import React from 'react';
 import {render} from 'react-dom';
 import App from './components/app/app';
-import {placesData} from './mock';
+import {offers} from './mock';
 
-render(<App places = {placesData} />, document.querySelector(`#root`));
+render(<App offers = {offers} />, document.querySelector(`#root`));

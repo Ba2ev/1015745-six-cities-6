@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
 const RATING_STEP = 20;
-const Card = ({data}) => {
-  const {isPremium, imageName, price, isFavourite, rating, title, type} = data;
-
+const PlaceCard = ({offer}) => {
+  const {id, isPremium, imagePreview, price, isFavourite, rating, title, type} = offer;
   return (
     <article className="cities__place-card place-card">
       {isPremium && <div className="place-card__mark">
         <span>Premium</span>
       </div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
-          <img className="place-card__image" src={`img/${imageName}.jpg`} width="260" height="200" alt="Place image"/>
-        </a>
+        <Link to={`/offer/${id}`}>
+          <img className="place-card__image" src={`img/${imagePreview}.jpg`} width="260" height="200" alt="Place image"/>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -35,7 +35,7 @@ const Card = ({data}) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -44,11 +44,12 @@ const Card = ({data}) => {
   );
 };
 
-Card.propTypes = {
-  data: PropTypes.shape(
+PlaceCard.propTypes = {
+  offer: PropTypes.shape(
       {
+        id: PropTypes.number.isRequired,
         isPremium: PropTypes.bool.isRequired,
-        imageName: PropTypes.string.isRequired,
+        imagePreview: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
         isFavourite: PropTypes.bool.isRequired,
         rating: PropTypes.number.isRequired,
@@ -58,4 +59,4 @@ Card.propTypes = {
   ),
 };
 
-export default Card;
+export default PlaceCard;

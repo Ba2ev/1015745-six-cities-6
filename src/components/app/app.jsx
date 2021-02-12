@@ -1,28 +1,36 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import MainPage from '../../pages/main-page/main-page';
-import SignIn from './../../pages/sign-in/sing-in';
-import Favourites from './../../pages/favourites/favourites';
-import Room from './../../pages/room/room';
-import NotFoundPage from './../../pages/not-found-page/not-found-page';
+import {propsOffers} from '../props-validation';
+import MainPage from '../pages/main-page/main-page';
+import SignIn from '../pages/sign-in/sing-in';
+import Favourites from '../pages/favourites/favourites';
+import Room from '../pages/room/room';
+import NotFoundPage from '../pages/not-found-page/not-found-page';
 
-
-const App = ({places}) => {
+const App = ({offers}) => {
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <MainPage places={places}/>
+          <MainPage offers={offers}/>
         </Route>
         <Route exact path="/login">
           <SignIn/>
         </Route>
-        <Route excat path="/favourites">
-          <Favourites/>
+        <Route excat
+          path="/favourites"
+          render = {() => {
+            const favOffers = offers.filter((offer) => offer.isFavourite);
+            return <Favourites offers={favOffers}/>;
+          }}>
         </Route>
-        <Route exact path="/offer/:id?">
-          <Room />
+        <Route exact
+          path="/offer/:id"
+          render= { ({match}) => {
+            const currentOffer = offers.find((offer) => offer.id === Number(match.params.id));
+            return <Room offer={currentOffer}/>;
+          }
+          }>
         </Route>
         <Route>
           <NotFoundPage />
@@ -33,20 +41,7 @@ const App = ({places}) => {
 };
 
 App.propTypes = {
-  places: PropTypes.arrayOf(
-      PropTypes.shape(
-          {
-            id: PropTypes.number.isRequired,
-            isPremium: PropTypes.bool.isRequired,
-            imageName: PropTypes.string.isRequired,
-            price: PropTypes.number.isRequired,
-            isFavourite: PropTypes.bool.isRequired,
-            rating: PropTypes.number.isRequired,
-            title: PropTypes.string.isRequired,
-            type: PropTypes.string.isRequired,
-          }
-      )
-  ).isRequired
+  offers: propsOffers,
 };
 
 export default App;

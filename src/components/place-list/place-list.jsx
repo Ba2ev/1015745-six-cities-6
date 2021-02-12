@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PlaceCard from '../place-card/place-card';
 
-const Places = ({places}) => {
+const PlaceList = ({offers}) => {
 
   return (
     <section className="cities__places places">
-      <h2 className="visually-hidden">Places</h2>
+      <h2 className="visually-hidden">PlaceList</h2>
       <b className="places__found">312 places to stay in Amsterdam</b>
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
@@ -24,19 +24,19 @@ const Places = ({places}) => {
         </ul>
       </form>
       <div className="cities__places-list places__list tabs__content">
-        { places.map(({id, ...data}) => <PlaceCard key={id} data={data} />) }
+        { offers.map((offer) => <PlaceCard key={offer.id} offer={offer} />) }
       </div>
     </section>
   );
 };
 
-Places.propTypes = {
-  places: PropTypes.arrayOf(
+PlaceList.propTypes = {
+  offers: PropTypes.arrayOf(
       PropTypes.shape(
           {
             id: PropTypes.number.isRequired,
             isPremium: PropTypes.bool.isRequired,
-            imageName: PropTypes.string.isRequired,
+            imagePreview: PropTypes.string.isRequired,
             price: PropTypes.number.isRequired,
             isFavourite: PropTypes.bool.isRequired,
             rating: PropTypes.number.isRequired,
@@ -47,4 +47,4 @@ Places.propTypes = {
   ).isRequired
 };
 
-export default Places;
+export default PlaceList;
