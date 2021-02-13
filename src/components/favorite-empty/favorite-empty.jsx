@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FavouriteEmpty = () => {
+const FavoriteEmpty = () => {
   return (
     <section className="favorites favorites--empty">
       <h1 className="visually-hidden">Favorites (empty)</h1>
@@ -12,4 +12,4 @@ const FavouriteEmpty = () => {
   );
 };
 
-export default FavouriteEmpty;
+export default FavoriteEmpty;

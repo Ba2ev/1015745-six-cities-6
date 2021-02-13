@@ -23,7 +23,7 @@ export const propsOffer = PropTypes.shape(
       id: PropTypes.number.isRequired,
       imagePreview: PropTypes.string.isRequired,
       images: PropTypes.arrayOf(PropTypes.string),
-      isFavourite: PropTypes.bool.isRequired,
+      isFavorite: PropTypes.bool.isRequired,
       isPremium: PropTypes.bool.isRequired,
       location: PropTypes.shape({
         latitide: PropTypes.number.isRequired,

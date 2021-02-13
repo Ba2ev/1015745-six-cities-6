@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PlaceCard from '../place-card/place-card';
+import {cardTypesParams} from '../../const';
+import Card from '../card/card';
 
 const PlaceList = ({offers}) => {
 
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">PlaceList</h2>
-      <b className="places__found">312 places to stay in Amsterdam</b>
+      <b className="places__found">{`${offers.length} places to stay in Amsterdam`}</b>
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
         <span className="places__sorting-type" tabIndex="0">
@@ -24,7 +25,7 @@ const PlaceList = ({offers}) => {
         </ul>
       </form>
       <div className="cities__places-list places__list tabs__content">
-        { offers.map((offer) => <PlaceCard key={offer.id} offer={offer} />) }
+        { offers.map((offer) => <Card key={offer.id} offer={offer} cardParams={cardTypesParams.CITIES}/>) }
       </div>
     </section>
   );
@@ -38,7 +39,7 @@ PlaceList.propTypes = {
             isPremium: PropTypes.bool.isRequired,
             imagePreview: PropTypes.string.isRequired,
             price: PropTypes.number.isRequired,
-            isFavourite: PropTypes.bool.isRequired,
+            isFavorite: PropTypes.bool.isRequired,
             rating: PropTypes.number.isRequired,
             title: PropTypes.string.isRequired,
             type: PropTypes.string.isRequired,

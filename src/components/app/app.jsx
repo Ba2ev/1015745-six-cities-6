@@ -1,34 +1,35 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import {propsOffers} from '../props-validation';
-import MainPage from '../pages/main-page/main-page';
-import SignIn from '../pages/sign-in/sing-in';
-import Favourites from '../pages/favourites/favourites';
-import Room from '../pages/room/room';
-import NotFoundPage from '../pages/not-found-page/not-found-page';
+import {routes} from '../../const';
+import MainPage from '../pages/main-page';
+import LoginPage from '../pages/login-page';
+import FavoritesPage from '../pages/favorites-page';
+import RoomPage from '../pages/room-page';
+import NotFoundPage from '../pages/not-found-page';
 
 const App = ({offers}) => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/">
+        <Route exact path={routes.MAIN}>
           <MainPage offers={offers}/>
         </Route>
-        <Route exact path="/login">
-          <SignIn/>
+        <Route exact path={routes.LOGIN}>
+          <LoginPage/>
         </Route>
         <Route excat
-          path="/favourites"
+          path={routes.FAVORITES}
           render = {() => {
-            const favOffers = offers.filter((offer) => offer.isFavourite);
-            return <Favourites offers={favOffers}/>;
+            const favoriteOffers = offers.filter((offer) => offer.isFavorite);
+            return <FavoritesPage offers={favoriteOffers}/>;
           }}>
         </Route>
         <Route exact
-          path="/offer/:id"
+          path={routes.OFFER}
           render= { ({match}) => {
             const currentOffer = offers.find((offer) => offer.id === Number(match.params.id));
-            return <Room offer={currentOffer}/>;
+            return <RoomPage offer={currentOffer}/>;
           }
           }>
         </Route>

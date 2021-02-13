@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../../layouts/header/header';
 
-const SignIn = () => {
+const LoginPage = () => {
   return (
     <div className="page page--gray page--login">
       <Header />
@@ -35,4 +35,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default LoginPage;

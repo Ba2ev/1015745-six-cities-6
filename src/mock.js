@@ -24,7 +24,7 @@ export const offers = [
     rating: 4.8,
     title: `Beautiful & luxurious apartment at great location`,
     description: `A quiet cozy and picturesque that hides behind a river by the unique lightness of Amsterdam`,
-    images: [`room`, `apartment-01`, `apartment-02`, `apartment-03`, `studio-01`, `apartment-01`],
+    images: [`room`, `apartment-01`, `apartment-02`, `apartment-03`, `studio-01`],
     host: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
       id: 3,
@@ -32,7 +32,7 @@ export const offers = [
       name: `Angelina`
     },
     isPremium: true,
-    isFavourite: false,
+    isFavorite: false,
   },
   {
     id: 2,
@@ -66,7 +66,7 @@ export const offers = [
       name: `Erik`
     },
     isPremium: false,
-    isFavourite: true,
+    isFavorite: true,
   },
   {
     id: 3,
@@ -100,7 +100,7 @@ export const offers = [
       name: `Erik`
     },
     isPremium: false,
-    isFavourite: false,
+    isFavorite: false,
   },
   {
     id: 4,
@@ -134,7 +134,7 @@ export const offers = [
       name: `Carla`
     },
     isPremium: true,
-    isFavourite: false,
+    isFavorite: false,
   },
   {
     id: 5,
@@ -168,7 +168,7 @@ export const offers = [
       name: `Lana`
     },
     isPremium: false,
-    isFavourite: true,
+    isFavorite: true,
   },
   {
     id: 6,
@@ -202,38 +202,32 @@ export const offers = [
       name: `Remy`
     },
     isPremium: false,
-    isFavourite: true,
+    isFavorite: true,
   },
 ];
 
 export const locations = [
   {
-    id: 1,
     name: `Paris`,
     isActive: false
   },
   {
-    id: 2,
     name: `Cologne`,
     isActive: false
   },
   {
-    id: 3,
     name: `Brussels`,
     isActive: false
   },
   {
-    id: 4,
     name: `Amsterdam`,
     isActive: true
   },
   {
-    id: 5,
     name: `Hamburg`,
     isActive: false
   },
   {
-    id: 6,
     name: `Dusseldorf`,
     isActive: false
   }

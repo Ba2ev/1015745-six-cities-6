@@ -1,13 +1,13 @@
 import React from 'react';
 import {propsOffer} from '../../props-validation';
 import Header from '../../layouts/header/header';
-import ReviewForm from './../../review-form/review-form';
-
-
+import ReviewForm from '../../review-form/review-form';
+import ImageList from '../../image-list/image-list';
+import GoodList from './../../good-list/good-list';
 const RATING_STEP = 20;
-const Room = ({offer}) => {
+const RoomPage = ({offer}) => {
 
-  const {images, isPremium, title, isFavourite, rating, type, bedrooms, adultsMax, price, goods, host, description} = offer;
+  const {images, isPremium, title, isFavorite, rating, type, bedrooms, adultsMax, price, goods, host, description} = offer;
 
   return (
     <div className="page">
@@ -15,17 +15,7 @@ const Room = ({offer}) => {
 
       <main className="page__main page__main--property">
         <section className="property">
-          <div className="property__gallery-container container">
-            <div className="property__gallery">
-              {images.map((image) => {
-                return (
-                  <div key={image} className="property__image-wrapper">
-                    <img className="property__image" src={`img/${image}.jpg`} alt="Photo studio"/>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+          <ImageList images={images}/>
           <div className="property__container container">
             <div className="property__wrapper">
               {
@@ -37,11 +27,11 @@ const Room = ({offer}) => {
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className={`property__bookmark-button ${isFavourite ? `property__bookmark-button--active` : ``} button`} type="button">
+                <button className={`property__bookmark-button ${isFavorite ? `property__bookmark-button--active` : ``} button`} type="button">
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
-                  <span className="visually-hidden">{isFavourite ? `In bookmarks` : `To bookmarks`}</span>
+                  <span className="visually-hidden">{isFavorite ? `In bookmarks` : `To bookmarks`}</span>
                 </button>
               </div>
               <div className="property__rating rating">
@@ -67,16 +57,7 @@ const Room = ({offer}) => {
                 <span className="property__price-text">&nbsp;night</span>
               </div>
               <div className="property__inside">
-                <h2 className="property__inside-title">What&apos;s inside</h2>
-                <ul className="property__inside-list">
-                  {goods.map((good) => {
-                    return (
-                      <li key={good} className="property__inside-item">
-                        {good}
-                      </li>
-                    );
-                  })}
-                </ul>
+                <GoodList goods={goods}/>
               </div>
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
@@ -233,8 +214,8 @@ const Room = ({offer}) => {
   );
 };
 
-Room.propTypes = {
+RoomPage.propTypes = {
   offer: propsOffer
 };
 
-export default Room;
+export default RoomPage;

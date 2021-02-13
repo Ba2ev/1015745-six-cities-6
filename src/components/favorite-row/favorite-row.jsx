@@ -1,9 +1,10 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {propsOffers} from '../props-validation';
-import FavouriteCard from '../favourite-card/favourite-card';
+import {cardTypesParams} from '../../const';
+import Card from '../card/card';
 
-const FavouriteRow = ({city, offers}) => {
+const FavoriteRow = ({city, offers}) => {
   return (
     <Fragment>
       <div className="favorites__locations locations locations--current">
@@ -14,15 +15,15 @@ const FavouriteRow = ({city, offers}) => {
         </div>
       </div>
       <div className="favorites__places">
-        {offers.map((offer) => <FavouriteCard key={offer.id} offer={offer}/>)}
+        {offers.map((offer) => <Card key={offer.id} offer={offer} cardParams={cardTypesParams.FAVORITES}/>)}
       </div>
     </Fragment>
   );
 };
 
-FavouriteRow.propTypes = {
+FavoriteRow.propTypes = {
   city: PropTypes.string.isRequired,
   offers: propsOffers,
 };
 
-export default FavouriteRow;
+export default FavoriteRow;
