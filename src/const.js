@@ -5,6 +5,11 @@ export const routes = {
   OFFER: `/offer/:id`,
 };
 
+export const cardTypes = {
+  CITIES: `CITIES`,
+  FAVORITES: `FAVORITES`,
+};
+
 export const cardTypesParams = {
   CITIES: {
     MIX_CLASS: `cities__place-card`,
@@ -21,3 +26,25 @@ export const cardTypesParams = {
   },
 };
 
+export const ratingStarsParams = [
+  {
+    value: `5`,
+    title: `perfect`,
+  },
+  {
+    value: `4`,
+    title: `good`,
+  },
+  {
+    value: `3`,
+    title: `not bad`,
+  },
+  {
+    value: `2`,
+    title: `badly`,
+  },
+  {
+    value: `1`,
+    title: `terribly`,
+  },
+];

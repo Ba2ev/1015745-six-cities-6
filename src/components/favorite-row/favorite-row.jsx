@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {propsOffers} from '../props-validation';
-import {cardTypesParams} from '../../const';
+import {cardTypes} from '../../const';
 import Card from '../card/card';
 
 const FavoriteRow = ({city, offers}) => {
@@ -15,7 +15,7 @@ const FavoriteRow = ({city, offers}) => {
         </div>
       </div>
       <div className="favorites__places">
-        {offers.map((offer) => <Card key={offer.id} offer={offer} cardParams={cardTypesParams.FAVORITES}/>)}
+        {offers.map((offer) => <Card key={offer.id} offer={offer} cardType={cardTypes.FAVORITES}/>)}
       </div>
     </Fragment>
   );

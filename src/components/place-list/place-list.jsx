@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {cardTypesParams} from '../../const';
+import {cardTypes} from '../../const';
 import Card from '../card/card';
 
 const PlaceList = ({offers}) => {
@@ -25,7 +25,7 @@ const PlaceList = ({offers}) => {
         </ul>
       </form>
       <div className="cities__places-list places__list tabs__content">
-        { offers.map((offer) => <Card key={offer.id} offer={offer} cardParams={cardTypesParams.CITIES}/>) }
+        { offers.map((offer) => <Card key={offer.id} offer={offer} cardType={cardTypes.CITIES}/>) }
       </div>
     </section>
   );
