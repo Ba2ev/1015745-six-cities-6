@@ -5,14 +5,14 @@ export const offers = [
     city: {
       name: `Amsterdam`,
       location: {
-        latitide: 42.384687,
-        longitude: 4.468876,
+        latitude: 52.38333,
+        longitude: 4.9,
         zoom: 10,
       }
     },
     location: {
-      latitide: 42.38468784384,
-      longitude: 4.46887668486,
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
       zoom: 8,
     },
     type: `Apartment`,
@@ -39,14 +39,14 @@ export const offers = [
     city: {
       name: `Amsterdam`,
       location: {
-        latitide: 42.384687,
-        longitude: 4.468876,
+        latitude: 52.38333,
+        longitude: 4.9,
         zoom: 10,
       }
     },
     location: {
-      latitide: 42.38468745879,
-      longitude: 4.46887631574,
+      latitude: 52.369553943508,
+      longitude: 4.85309666406198,
       zoom: 8,
     },
     type: `Private room`,
@@ -73,14 +73,14 @@ export const offers = [
     city: {
       name: `Amsterdam`,
       location: {
-        latitide: 42.384687,
-        longitude: 4.468876,
+        latitude: 52.38333,
+        longitude: 4.9,
         zoom: 10,
       }
     },
     location: {
-      latitide: 42.38468721354,
-      longitude: 4.46887648768,
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
       zoom: 8,
     },
     type: `Apartment`,
@@ -107,14 +107,14 @@ export const offers = [
     city: {
       name: `Amsterdam`,
       location: {
-        latitide: 42.384687,
-        longitude: 4.468876,
+        latitude: 52.38333,
+        longitude: 4.9,
         zoom: 10,
       }
     },
     location: {
-      latitide: 42.38468721354,
-      longitude: 4.46887648768,
+      latitude: 52.3709553943508,
+      longitude: 4.939784666401257,
       zoom: 8,
     },
     type: `Apartment`,
@@ -141,14 +141,14 @@ export const offers = [
     city: {
       name: `Amsterdam`,
       location: {
-        latitide: 42.384687,
-        longitude: 4.468876,
+        latitude: 52.38333,
+        longitude: 4.9,
         zoom: 10,
       }
     },
     location: {
-      latitide: 42.38468744658,
-      longitude: 4.46887695468,
+      latitude: 52.3809553943508,
+      longitude: 4.90309612506256,
       zoom: 8,
     },
     type: `Apartment`,
@@ -175,14 +175,14 @@ export const offers = [
     city: {
       name: `Paris`,
       location: {
-        latitide: 38.138468,
+        latitude: 38.138468,
         longitude: 7.546847,
         zoom: 10,
       }
     },
     location: {
-      latitide: 38.13846884384,
-      longitude: 7.54684768486,
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406256,
       zoom: 8,
     },
     type: `Apartment`,
