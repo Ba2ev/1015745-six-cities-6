@@ -7,7 +7,7 @@ export const propsOffer = PropTypes.shape(
       city: PropTypes.shape({
         name: PropTypes.string.isRequired,
         location: PropTypes.shape({
-          latitide: PropTypes.number.isRequired,
+          latitude: PropTypes.number.isRequired,
           longitude: PropTypes.number.isRequired,
           zoom: PropTypes.number.isRequired,
         }),
@@ -26,7 +26,7 @@ export const propsOffer = PropTypes.shape(
       isFavorite: PropTypes.bool.isRequired,
       isPremium: PropTypes.bool.isRequired,
       location: PropTypes.shape({
-        latitide: PropTypes.number.isRequired,
+        latitude: PropTypes.number.isRequired,
         longitude: PropTypes.number.isRequired,
         zoom: PropTypes.number.isRequired,
       }),
