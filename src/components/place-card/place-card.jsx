@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {propsOffer} from '../props-validation';
-import {cardTypesParams} from '../../const';
+import {cardTypesParams, ratingTypes} from '../../const';
 import {Link} from 'react-router-dom';
-import StaticRating from '../static-rating/static-rating';
+import Rating from '../rating/rating';
 
 const PlaceCard = ({offer, cardType}) => {
   const {id, isPremium = false, imagePreview, price, isFavorite, rating, title, type} = offer;
@@ -35,7 +35,7 @@ const PlaceCard = ({offer, cardType}) => {
             <span className="visually-hidden">{isFavorite ? `In bookmarks` : `To bookmarks`}</span>
           </button>
         </div>
-        <StaticRating rating={rating}/>
+        <Rating rating={rating} type={ratingTypes.CARD}/>
         <h2 className="place-card__name">
           <Link to={`/offer/${id}`}>{title}</Link>
         </h2>

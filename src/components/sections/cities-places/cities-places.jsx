@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {cardTypes} from '../../const';
-import Card from '../card/card';
+import {cardTypes} from '../../../const';
+import PlaceCard from '../../place-card/place-card';
 
-const PlaceList = ({offers}) => {
+const CitiesPlaces = ({offers}) => {
 
   return (
     <section className="cities__places places">
@@ -25,13 +25,13 @@ const PlaceList = ({offers}) => {
         </ul>
       </form>
       <div className="cities__places-list places__list tabs__content">
-        { offers.map((offer) => <Card key={offer.id} offer={offer} cardType={cardTypes.CITIES}/>) }
+        { offers.map((offer) => <PlaceCard key={offer.id} offer={offer} cardType={cardTypes.CITIES}/>) }
       </div>
     </section>
   );
 };
 
-PlaceList.propTypes = {
+CitiesPlaces.propTypes = {
   offers: PropTypes.arrayOf(
       PropTypes.shape(
           {
@@ -48,4 +48,4 @@ PlaceList.propTypes = {
   ).isRequired
 };
 
-export default PlaceList;
+export default CitiesPlaces;
