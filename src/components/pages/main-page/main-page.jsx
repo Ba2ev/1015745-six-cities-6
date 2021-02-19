@@ -1,8 +1,8 @@
 import React from 'react';
 import {propsOffers} from '../../props-validation';
 import {mapTypes} from '../../../const';
-import Locations from '../../sections/locations';
-import CitiesPlaces from '../../sections/cities-places';
+import Locations from '../../locations';
+import CitiesPlaces from '../../cities-places';
 import Header from '../../layouts/header/header';
 import Map from '../../map/map';
 

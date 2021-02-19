@@ -95,3 +95,31 @@ export const mapTypesParams = {
     height: 579,
   },
 };
+
+export const userTypes = {
+  PROPERTY: `PROPERTY`,
+  REVIEW: `REVIEW`,
+};
+
+export const userTypesParams = {
+  PROPERTY: {
+    MIX_CLASS: `property__host-user`,
+    IMAGE_WRAP_CLASS: `property__avatar-wrapper`,
+    IMAGE_WRAP_PRO_CLASS: `property__avatar-wrapper--pro`,
+    IMAGE_AVATAR_CLASS: `property__avatar`,
+    IMAGE_WIDTH: 74,
+    IMAGE_HEIGHT: 74,
+    IMAGE_ALT: `Host avatar`,
+    USER_NAME_CLASS: `property__user-name`,
+    USER_STATUS_CLASS: `property__user-status`,
+  },
+  REVIEW: {
+    MIX_CLASS: `reviews__user`,
+    IMAGE_WRAP_CLASS: `reviews__avatar-wrapper`,
+    IMAGE_AVATAR_CLASS: `reviews__avatar`,
+    IMAGE_WIDTH: 54,
+    IMAGE_HEIGHT: 54,
+    IMAGE_ALT: `Reviews avatar`,
+    USER_NAME_CLASS: `reviews__user-name`,
+  },
+};

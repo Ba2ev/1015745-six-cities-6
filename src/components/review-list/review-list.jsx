@@ -1,14 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Review from '../review/review';
+import ReviewItem from '../review-item/review-item';
 
 const ReviewList = ({reviews}) => {
   return (
     <ul className="reviews__list">
       {reviews.map((review) => (
-        <li key={review.id} className="reviews__item">
-          <Review reviewData={review}/>
-        </li>
+        <ReviewItem key={review.id} review={review}/>
       ))}
     </ul>
   );

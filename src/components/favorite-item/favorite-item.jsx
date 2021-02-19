@@ -1,12 +1,12 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {propsOffers} from '../props-validation';
 import {cardTypes} from '../../const';
 import PlaceCard from '../place-card/place-card';
 
-const FavoriteRow = ({city, offers}) => {
+const FavoriteItem = ({city, offers}) => {
   return (
-    <Fragment>
+    <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
           <a className="locations__item-link" href="#">
@@ -17,13 +17,13 @@ const FavoriteRow = ({city, offers}) => {
       <div className="favorites__places">
         {offers.map((offer) => <PlaceCard key={offer.id} offer={offer} cardType={cardTypes.FAVORITES}/>)}
       </div>
-    </Fragment>
+    </li>
   );
 };
 
-FavoriteRow.propTypes = {
+FavoriteItem.propTypes = {
   city: PropTypes.string.isRequired,
   offers: propsOffers,
 };
 
-export default FavoriteRow;
+export default FavoriteItem;

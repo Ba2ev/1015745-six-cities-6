@@ -1,6 +1,6 @@
 import React from 'react';
 import {propsOffers} from '../props-validation';
-import FavoriteRow from '../favorite-row/favorite-row';
+import FavoriteItem from '../favorite-item/favorite-item';
 
 const FavoriteList = ({offers}) => {
   const favoriteCities = offers.map((offer) => offer.city.name).sort();
@@ -13,11 +13,7 @@ const FavoriteList = ({offers}) => {
         {
           cities.map((city) => {
             const cityFavoriteOffers = offers.filter((offer) => offer.city.name === city);
-            return (
-              <li key={city} className="favorites__locations-items">
-                <FavoriteRow city={city} offers={cityFavoriteOffers}/>
-              </li>
-            );
+            return <FavoriteItem key={city} city={city} offers={cityFavoriteOffers}/>;
           })
         }
       </ul>

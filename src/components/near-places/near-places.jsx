@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {cardTypes} from '../../../const';
-import PlaceCard from '../../place-card/place-card';
+import {cardTypes} from '../../const';
+import PlaceCard from '../place-card';
 
 const NearPlaces = ({offers}) => {
   return (

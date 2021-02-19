@@ -1,15 +1,16 @@
 import React from 'react';
 import {propsOffer} from '../../props-validation';
 import {nearOffers, reviews} from '../../../mock';
-import {mapTypes, ratingTypes} from '../../../const';
+import {mapTypes, ratingTypes, userTypes} from '../../../const';
 import Header from '../../layouts/header/header';
 import Rating from '../../rating/rating';
 import ImageList from '../../image-list/image-list';
+import User from '../../user';
 import Map from '../../map/map';
 import GoodList from '../../good-list/good-list';
 import ReviewList from '../../review-list/review-list';
 import ReviewForm from '../../review-form/review-form';
-import NearPlaces from '../../sections/near-places';
+import NearPlaces from '../../near-places';
 
 const RoomPage = ({offer}) => {
 
@@ -63,15 +64,7 @@ const RoomPage = ({offer}) => {
               </div>
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
-                <div className="property__host-user user">
-                  <div className={`property__avatar-wrapper ${host.isPro ? `property__avatar-wrapper--pro` : ``} user__avatar-wrapper`}>
-                    <img className="property__avatar user__avatar" src={`${host.avatarUrl}`} width="74" height="74" alt="Host avatar"/>
-                  </div>
-                  <span className="property__user-name">
-                    {host.name}
-                  </span>
-                  {host.isPro && <span className="property__user-status">Pro</span>}
-                </div>
+                <User user={host} userType={userTypes.PROPERTY}/>
                 <div className="property__description">
                   <p className="property__text">
                     {description}

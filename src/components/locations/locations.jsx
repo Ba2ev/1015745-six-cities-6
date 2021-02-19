@@ -1,5 +1,5 @@
 import React from 'react';
-import {locations} from '../../../mock';
+import {locations} from '../../mock';
 const Locations = () => {
   return (
     <section className="locations container">
