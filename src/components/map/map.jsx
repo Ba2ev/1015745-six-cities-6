@@ -39,11 +39,11 @@ const Map = ({place, points, type}) => {
       })
       .addTo(mapRef.current)
       .bindPopup(point.title);
-
-      return () => {
-        mapRef.current.remove();
-      };
     });
+
+    return () => {
+      mapRef.current.remove();
+    };
   }, [place, points]);
 
   return (
