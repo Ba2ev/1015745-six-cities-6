@@ -1,20 +1,21 @@
 import React, {useRef, useEffect} from 'react';
 import leaflet from 'leaflet';
+import {mapTypesParams} from '../../const';
 import PropTypes from 'prop-types';
 
 import "leaflet/dist/leaflet.css";
 
-const Map = ({city, points}) => {
+const Map = ({place, points, type}) => {
 
   const mapRef = useRef();
 
   useEffect(() => {
     mapRef.current = leaflet.map(`map`, {
       center: {
-        lat: city.location.latitude,
-        lng: city.location.longitude
+        lat: place.latitude,
+        lng: place.longitude
       },
-      zoom: city.location.zoom
+      zoom: place.zoom
     });
 
     leaflet
@@ -25,8 +26,8 @@ const Map = ({city, points}) => {
 
     points.forEach((point) => {
       const customIcon = leaflet.icon({
-        iconUrl: `./img/pin.svg`,
-        iconSize: [30, 30]
+        iconUrl: mapTypesParams[type].iconUrl,
+        iconSize: mapTypesParams[type].iconSize
       });
 
       leaflet.marker({
@@ -38,34 +39,32 @@ const Map = ({city, points}) => {
       })
       .addTo(mapRef.current)
       .bindPopup(point.title);
-
-      return () => {
-        mapRef.current.remove();
-      };
     });
-  }, [city, points]);
+
+    return () => {
+      mapRef.current.remove();
+    };
+  }, [place, points]);
 
   return (
-    <div id="map" style={{height: `736px`}} ref={mapRef}></div>
+    <div id="map" style={{height: `${mapTypesParams[type].height}px`}} ref={mapRef}></div>
   );
 };
 
 Map.propTypes = {
-  city: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    location: PropTypes.shape({
-      latitude: PropTypes.number.isRequired,
-      longitude: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }),
-  }),
+  place: PropTypes.shape({
+    latitude: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired,
+    zoom: PropTypes.number.isRequired,
+  }).isRequired,
   points: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     location: PropTypes.shape({
       latitude: PropTypes.number.isRequired,
       longitude: PropTypes.number.isRequired
     }),
-  }))
+  })).isRequired,
+  type: PropTypes.string.isRequired
 };
 
 export default Map;

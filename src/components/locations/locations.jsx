@@ -1,6 +1,6 @@
 import React from 'react';
 import {locations} from '../../mock';
-const LocationList = () => {
+const Locations = () => {
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
@@ -16,4 +16,4 @@ const LocationList = () => {
   );
 };
 
-export default LocationList;
+export default Locations;
