@@ -4,7 +4,7 @@ import {mapTypes} from '../../../const';
 import Locations from '../../locations';
 import CitiesPlaces from '../../cities-places';
 import Header from '../../layouts/header/header';
-import Map from '../../map/map';
+import Map from '../../map';
 
 const currentCity = `Amsterdam`;
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {propsOffers} from '../props-validation';
-import {cardTypes} from '../../const';
-import PlaceCard from '../place-card/place-card';
+import {cardListTypes} from '../../const';
+import PlaceList from '../place-list';
 
 const FavoriteItem = ({city, offers}) => {
   return (
@@ -14,9 +14,7 @@ const FavoriteItem = ({city, offers}) => {
           </a>
         </div>
       </div>
-      <div className="favorites__places">
-        {offers.map((offer) => <PlaceCard key={offer.id} offer={offer} cardType={cardTypes.FAVORITES}/>)}
-      </div>
+      <PlaceList offers={offers} listType={cardListTypes.FAVORITES}/>
     </li>
   );
 };

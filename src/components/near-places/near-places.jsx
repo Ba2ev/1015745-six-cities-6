@@ -1,21 +1,19 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {cardTypes} from '../../const';
-import PlaceCard from '../place-card';
+import {propsOffers} from '../props-validation';
+import {cardListTypes} from '../../const';
+import PlaceList from '../place-list';
 
 const NearPlaces = ({offers}) => {
   return (
     <section className="near-places places">
       <h2 className="near-places__title">Other places in the neighbourhood</h2>
-      <div className="near-places__list places__list">
-        {offers.map((offer) => <PlaceCard key={offer.id} offer={offer} cardType={cardTypes.NEARS}/>)}
-      </div>
+      <PlaceList offers={offers} listType={cardListTypes.NEARS}/>
     </section>
   );
 };
 
 NearPlaces.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.object),
+  offers: propsOffers,
 };
 
 export default NearPlaces;

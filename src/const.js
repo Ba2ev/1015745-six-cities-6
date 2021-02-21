@@ -5,6 +5,52 @@ export const routes = {
   OFFER: `/offer/:id`,
 };
 
+export const markPremiumTypes = {
+  CARD: `CARD`,
+  PROPERTY: `PROPERTY`,
+};
+
+export const markPremiumTypesParams = {
+  CARD: `place-card__mark`,
+  PROPERTY: `property__mark`,
+};
+
+export const bookmarkBtnTypes = {
+  PLACES: `PLACES`,
+  PROPERTY: `PROPERTY`,
+};
+
+export const bookmarkBtnTypesParams = {
+  PLACES: {
+    BTN_CLASS: `place-card`,
+    ICON_WIDTH: 18,
+    ICON_HEIGHT: 19,
+  },
+  PROPERTY: {
+    BTN_CLASS: `property`,
+    ICON_WIDTH: 31,
+    ICON_HEIGHT: 33,
+  },
+};
+
+export const cardListTypes = {
+  CITIES: `CITIES`,
+  FAVORITES: `FAVORITES`,
+  NEARS: `NEARS`
+};
+
+export const cardListTypesParams = {
+  CITIES: {
+    LIST_CLASS: `cities__places-list places__list tabs__content`
+  },
+  FAVORITES: {
+    LIST_CLASS: `favorites__places`
+  },
+  NEARS: {
+    LIST_CLASS: `near-places__list places__list`
+  },
+};
+
 export const cardTypes = {
   CITIES: `CITIES`,
   FAVORITES: `FAVORITES`,
