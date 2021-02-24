@@ -54,9 +54,7 @@ const RoomPage = ({offer}) => {
               <Reviews reviews={reviews}/>
             </div>
           </div>
-          <section className="property__map map">
-            <Map place={location} points={pointsParams} type={mapTypes.CARD}/>
-          </section>
+          <Map place={location} points={pointsParams} mapType={mapTypes.PROPERTY}/>
         </section>
         <div className="container">
           <NearPlaces offers={nearOffers}/>
