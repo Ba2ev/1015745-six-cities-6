@@ -1,10 +1,10 @@
 import {ActionType} from './action';
 import {locations} from '../const';
-import {getCityOffers} from '../util';
+import {offers} from '../mock';
 
 const initialState = {
   city: locations[0].name,
-  cityOffers: getCityOffers(locations[0].name),
+  offers,
 };
 
 const reducer = (state = initialState, action) => {
@@ -13,11 +13,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         city: action.payload,
-      };
-    case ActionType.UPDATE_OFFERS:
-      return {
-        ...state,
-        cityOffers: action.payload,
       };
     default:
       return state;

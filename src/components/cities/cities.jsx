@@ -6,13 +6,14 @@ import {locations, mapTypes} from '../../const';
 import CitiesPlaces from '../cities-places';
 import Map from '../map';
 
-const Cities = ({city, cityOffers}) => {
+const Cities = ({city, offers}) => {
+  const cityOffers = offers.filter(({city: {name}}) => name === city);
   const cityParams = locations.find(({name}) => name === city).point;
 
   return (
     <div className="cities">
       <div className="cities__places-container container">
-        <CitiesPlaces/>
+        <CitiesPlaces city={city} offers={cityOffers}/>
         <div className="cities__right-section">
           <Map place={cityParams} points={cityOffers} mapType={mapTypes.MAIN}/>
         </div>
@@ -23,12 +24,12 @@ const Cities = ({city, cityOffers}) => {
 
 Cities.propTypes = {
   city: PropTypes.string.isRequired,
-  cityOffers: propsOffers,
+  offers: propsOffers,
 };
 
 const mapStateToProps = (state) => ({
   city: state.city,
-  cityOffers: state.cityOffers,
+  offers: state.offers,
 });
 
 export {Cities};
