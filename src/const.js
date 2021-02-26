@@ -184,12 +184,14 @@ export const mapTypesParams = {
   MAIN: {
     mixClass: `cities__map`,
     iconUrl: `./img/pin.svg`,
+    iconActiveUrl: `./img/pin-active.svg`,
     iconSize: [30, 30],
     height: 736,
   },
   PROPERTY: {
     mixClass: `property__map`,
     iconUrl: `./img/pin.svg`,
+    iconActiveUrl: `./img/img/pin-active.svg`,
     iconSize: [30, 30],
     height: 579,
   },
@@ -221,4 +223,11 @@ export const userTypesParams = {
     IMAGE_ALT: `Reviews avatar`,
     USER_NAME_CLASS: `reviews__user-name`,
   },
+};
+
+export const sortTypes = {
+  POPULAR: `Popular`,
+  PRICE_LOW: `Price: low to high`,
+  PRICE_HIGH: `Price: high to low`,
+  RATING: `Top rated first`
 };
