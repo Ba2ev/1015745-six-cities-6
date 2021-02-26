@@ -1,8 +1,105 @@
+export const locations = [
+  {
+    name: `Paris`,
+    point: {
+      latitude: 48.86268,
+      longitude: 2.33779,
+      zoom: 10,
+    }
+  },
+  {
+    name: `Cologne`,
+    point: {
+      latitude: 50.94724,
+      longitude: 6.95976,
+      zoom: 10,
+    }
+  },
+  {
+    name: `Brussels`,
+    point: {
+      latitude: 50.84889,
+      longitude: 4.35136,
+      zoom: 10,
+    }
+  },
+  {
+    name: `Amsterdam`,
+    point: {
+      latitude: 52.370216,
+      longitude: 4.895168,
+      zoom: 10,
+    }
+  },
+  {
+    name: `Hamburg`,
+    point: {
+      latitude: 53.558490,
+      longitude: 9.787741,
+      zoom: 10,
+    }
+  },
+  {
+    name: `Dusseldorf`,
+    point: {
+      latitude: 51.238371,
+      longitude: 6.674269,
+      zoom: 10,
+    }
+  }
+];
+
 export const routes = {
   MAIN: `/`,
   LOGIN: `/login`,
   FAVORITES: `/favorites`,
   OFFER: `/offer/:id`,
+};
+
+export const markPremiumTypes = {
+  CARD: `CARD`,
+  PROPERTY: `PROPERTY`,
+};
+
+export const markPremiumTypesParams = {
+  CARD: `place-card__mark`,
+  PROPERTY: `property__mark`,
+};
+
+export const bookmarkBtnTypes = {
+  PLACES: `PLACES`,
+  PROPERTY: `PROPERTY`,
+};
+
+export const bookmarkBtnTypesParams = {
+  PLACES: {
+    BTN_CLASS: `place-card`,
+    ICON_WIDTH: 18,
+    ICON_HEIGHT: 19,
+  },
+  PROPERTY: {
+    BTN_CLASS: `property`,
+    ICON_WIDTH: 31,
+    ICON_HEIGHT: 33,
+  },
+};
+
+export const cardListTypes = {
+  CITIES: `CITIES`,
+  FAVORITES: `FAVORITES`,
+  NEARS: `NEARS`
+};
+
+export const cardListTypesParams = {
+  CITIES: {
+    LIST_CLASS: `cities__places-list places__list tabs__content`
+  },
+  FAVORITES: {
+    LIST_CLASS: `favorites__places`
+  },
+  NEARS: {
+    LIST_CLASS: `near-places__list places__list`
+  },
 };
 
 export const cardTypes = {
@@ -80,16 +177,18 @@ export const ratingStarsParams = [
 
 export const mapTypes = {
   MAIN: `MAIN`,
-  CARD: `CARD`,
+  PROPERTY: `PROPERTY`,
 };
 
 export const mapTypesParams = {
   MAIN: {
+    mixClass: `cities__map`,
     iconUrl: `./img/pin.svg`,
     iconSize: [30, 30],
     height: 736,
   },
-  CARD: {
+  PROPERTY: {
+    mixClass: `property__map`,
     iconUrl: `./img/pin.svg`,
     iconSize: [30, 30],
     height: 579,

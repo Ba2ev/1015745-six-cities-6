@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {propsOffer} from '../props-validation';
-import {cardTypesParams, ratingTypes} from '../../const';
+import {markPremiumTypes, cardTypesParams, ratingTypes, bookmarkBtnTypes} from '../../const';
 import {Link} from 'react-router-dom';
+import PremiumMark from '../premium-mark';
+import BookmarkBtn from '../bookmark-btn';
 import Rating from '../rating/rating';
 
 const PlaceCard = ({offer, cardType}) => {
@@ -10,9 +12,7 @@ const PlaceCard = ({offer, cardType}) => {
 
   return (
     <article className={`${cardTypesParams[cardType].MIX_CLASS || ``} place-card`}>
-      {isPremium && <div className="place-card__mark">
-        <span>Premium</span>
-      </div>}
+      {isPremium && <PremiumMark type={markPremiumTypes.CARD}/>}
       <div className={`${cardTypesParams[cardType].IMAGE_WRAP_CLASS || ``} place-card__image-wrapper`}>
         <Link to={`/offer/${id}`}>
           <img className="place-card__image"
@@ -28,12 +28,7 @@ const PlaceCard = ({offer, cardType}) => {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button ${isFavorite ? `place-card__bookmark-button--active` : ``} button`} type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">{isFavorite ? `In bookmarks` : `To bookmarks`}</span>
-          </button>
+          <BookmarkBtn btnType={bookmarkBtnTypes.PLACES} isFavorite={isFavorite}/>
         </div>
         <Rating rating={rating} type={ratingTypes.CARD}/>
         <h2 className="place-card__name">

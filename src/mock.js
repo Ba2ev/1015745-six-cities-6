@@ -181,8 +181,8 @@ export const offers = [
       }
     },
     location: {
-      latitude: 52.3809553943508,
-      longitude: 4.939309666406256,
+      latitude: 48.86442,
+      longitude: 2.35083,
       zoom: 12,
     },
     type: `Apartment`,
@@ -338,29 +338,3 @@ export const reviews = [
   }
 ];
 
-export const locations = [
-  {
-    name: `Paris`,
-    isActive: false
-  },
-  {
-    name: `Cologne`,
-    isActive: false
-  },
-  {
-    name: `Brussels`,
-    isActive: false
-  },
-  {
-    name: `Amsterdam`,
-    isActive: true
-  },
-  {
-    name: `Hamburg`,
-    isActive: false
-  },
-  {
-    name: `Dusseldorf`,
-    isActive: false
-  }
-];

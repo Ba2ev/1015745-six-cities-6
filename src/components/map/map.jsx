@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import "leaflet/dist/leaflet.css";
 
-const Map = ({place, points, type}) => {
+const Map = ({place, points, mapType}) => {
 
   const mapRef = useRef();
 
@@ -26,8 +26,8 @@ const Map = ({place, points, type}) => {
 
     points.forEach((point) => {
       const customIcon = leaflet.icon({
-        iconUrl: mapTypesParams[type].iconUrl,
-        iconSize: mapTypesParams[type].iconSize
+        iconUrl: mapTypesParams[mapType].iconUrl,
+        iconSize: mapTypesParams[mapType].iconSize
       });
 
       leaflet.marker({
@@ -47,7 +47,9 @@ const Map = ({place, points, type}) => {
   }, [place, points]);
 
   return (
-    <div id="map" style={{height: `${mapTypesParams[type].height}px`}} ref={mapRef}></div>
+    <section className={`${mapTypesParams[mapType].mixClass || ``} map`}>
+      <div id="map" style={{height: `${mapTypesParams[mapType].height}px`}} ref={mapRef}></div>
+    </section>
   );
 };
 
@@ -64,7 +66,7 @@ Map.propTypes = {
       longitude: PropTypes.number.isRequired
     }),
   })).isRequired,
-  type: PropTypes.string.isRequired
+  mapType: PropTypes.string.isRequired
 };
 
 export default Map;

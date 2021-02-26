@@ -1,22 +1,27 @@
 import React from 'react';
 import {propsOffer} from '../../props-validation';
 import {nearOffers, reviews} from '../../../mock';
-import {mapTypes, ratingTypes, userTypes} from '../../../const';
+import {markPremiumTypes, mapTypes, ratingTypes, bookmarkBtnTypes} from '../../../const';
 import Header from '../../layouts/header/header';
-import Rating from '../../rating/rating';
 import ImageList from '../../image-list/image-list';
-import User from '../../user';
-import Map from '../../map/map';
+import PremiumMark from '../../premium-mark';
+import Rating from '../../rating/rating';
+import BookmarkBtn from '../../bookmark-btn';
+import PropertyFeatures from '../../property-features';
 import GoodList from '../../good-list/good-list';
-import ReviewList from '../../review-list/review-list';
-import ReviewForm from '../../review-form/review-form';
+import PropertyHost from '../../property-host';
+import Map from '../../map';
+import Reviews from '../../reviews';
 import NearPlaces from '../../near-places';
 
 const RoomPage = ({offer}) => {
 
   const {images, isPremium, title, isFavorite, rating, type, bedrooms, adultsMax, price, goods, host, description, location} = offer;
 
-  const pointsParams = nearOffers.map((nearOffer) => Object.assign({title: nearOffer.title}, {location: nearOffer.location}));
+  const pointsParams = nearOffers.map((nearOffer) => ({
+    title: nearOffer.title,
+    location: nearOffer.location
+  }));
 
   return (
     <div className="page">
@@ -28,33 +33,16 @@ const RoomPage = ({offer}) => {
           <div className="property__container container">
             <div className="property__wrapper">
               {
-                isPremium && <div className="property__mark">
-                  <span>Premium</span>
-                </div>
+                isPremium && <PremiumMark type={markPremiumTypes.PROPERTY}/>
               }
               <div className="property__name-wrapper">
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className={`property__bookmark-button ${isFavorite ? `property__bookmark-button--active` : ``} button`} type="button">
-                  <svg className="property__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">{isFavorite ? `In bookmarks` : `To bookmarks`}</span>
-                </button>
+                <BookmarkBtn btnType={bookmarkBtnTypes.PROPERTY} isFavorite={isFavorite}/>
               </div>
               <Rating rating={rating} type={ratingTypes.PROPERTY} isValueShowed/>
-              <ul className="property__features">
-                <li className="property__feature property__feature--entire">
-                  {type}
-                </li>
-                <li className="property__feature property__feature--bedrooms">
-                  {`${bedrooms} Bedrooms`}
-                </li>
-                <li className="property__feature property__feature--adults">
-                  {`Max ${adultsMax} adults`}
-                </li>
-              </ul>
+              <PropertyFeatures type={type} bedrooms={bedrooms} adultsMax={adultsMax}/>
               <div className="property__price">
                 <b className="property__price-value">&euro;{price}</b>
                 <span className="property__price-text">&nbsp;night</span>
@@ -62,25 +50,11 @@ const RoomPage = ({offer}) => {
               <div className="property__inside">
                 <GoodList goods={goods}/>
               </div>
-              <div className="property__host">
-                <h2 className="property__host-title">Meet the host</h2>
-                <User user={host} userType={userTypes.PROPERTY}/>
-                <div className="property__description">
-                  <p className="property__text">
-                    {description}
-                  </p>
-                </div>
-              </div>
-              <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-                <ReviewList reviews={reviews} />
-                <ReviewForm />
-              </section>
+              <PropertyHost host={host} description={description}/>
+              <Reviews reviews={reviews}/>
             </div>
           </div>
-          <section className="property__map map">
-            <Map place={location} points={pointsParams} type={mapTypes.CARD}/>
-          </section>
+          <Map place={location} points={pointsParams} mapType={mapTypes.PROPERTY}/>
         </section>
         <div className="container">
           <NearPlaces offers={nearOffers}/>
