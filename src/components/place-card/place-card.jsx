@@ -12,17 +12,17 @@ import Rating from '../rating/rating';
 const PlaceCard = ({offer, cardType, updateHoveredId}) => {
   const {id, isPremium = false, imagePreview, price, isFavorite, rating, title, type} = offer;
 
-  const setHoverId = (evt) => {
+  const handleMouseEnter = (evt) => {
     const {cartId} = evt.target.closest(`ARTICLE`).dataset;
-    updateHoveredId(+cartId);
+    updateHoveredId(Number(cartId));
   };
 
-  const removeHoverId = () => {
+  const handleMouseLeave = () => {
     updateHoveredId(null);
   };
 
   return (
-    <article className={`${cardTypesParams[cardType].MIX_CLASS || ``} place-card`} onMouseEnter={setHoverId} onMouseLeave={removeHoverId} data-cart-id={id}>
+    <article className={`${cardTypesParams[cardType].MIX_CLASS || ``} place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} data-cart-id={id}>
       {isPremium && <PremiumMark type={markPremiumTypes.CARD}/>}
       <div className={`${cardTypesParams[cardType].IMAGE_WRAP_CLASS || ``} place-card__image-wrapper`}>
         <Link to={`/offer/${id}`}>
