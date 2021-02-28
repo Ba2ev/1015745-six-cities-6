@@ -1,11 +1,12 @@
 import React, {useRef, useEffect} from 'react';
+import {connect} from 'react-redux';
 import leaflet from 'leaflet';
-import {mapTypesParams} from '../../const';
 import PropTypes from 'prop-types';
+import {mapTypesParams} from '../../const';
 
 import "leaflet/dist/leaflet.css";
 
-const Map = ({place, points, mapType}) => {
+const Map = ({place, points, mapType, hoveredOffer}) => {
 
   const mapRef = useRef();
 
@@ -24,27 +25,34 @@ const Map = ({place, points, mapType}) => {
       })
       .addTo(mapRef.current);
 
-    points.forEach((point) => {
+    return () => {
+      mapRef.current.remove();
+    };
+  }, [place]);
+
+  useEffect(() => {
+    const markers = points.map((point) => {
+      const currentIconUrl = point.id === hoveredOffer ? mapTypesParams[mapType].iconActiveUrl : mapTypesParams[mapType].iconUrl;
+
       const customIcon = leaflet.icon({
-        iconUrl: mapTypesParams[mapType].iconUrl,
+        iconUrl: currentIconUrl,
         iconSize: mapTypesParams[mapType].iconSize
       });
 
-      leaflet.marker({
+      return leaflet.marker({
         lat: point.location.latitude,
         lng: point.location.longitude
       },
       {
         icon: customIcon
       })
-      .addTo(mapRef.current)
       .bindPopup(point.title);
     });
 
-    return () => {
-      mapRef.current.remove();
-    };
-  }, [place, points]);
+    let map = leaflet.layerGroup(markers).addTo(mapRef.current);
+
+    return () => map.clearLayers();
+  }, [points, hoveredOffer]);
 
   return (
     <section className={`${mapTypesParams[mapType].mixClass || ``} map`}>
@@ -66,7 +74,13 @@ Map.propTypes = {
       longitude: PropTypes.number.isRequired
     }),
   })).isRequired,
-  mapType: PropTypes.string.isRequired
+  mapType: PropTypes.string.isRequired,
+  hoveredOffer: PropTypes.number
 };
 
-export default Map;
+const mapStateToProps = (state) => ({
+  hoveredOffer: state.hoveredOffer,
+});
+
+export {Map};
+export default connect(mapStateToProps)(Map);

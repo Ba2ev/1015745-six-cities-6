@@ -1,17 +1,28 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {propsOffer} from '../props-validation';
+import {ActionCreator} from '../../store/action';
 import {markPremiumTypes, cardTypesParams, ratingTypes, bookmarkBtnTypes} from '../../const';
 import {Link} from 'react-router-dom';
 import PremiumMark from '../premium-mark';
 import BookmarkBtn from '../bookmark-btn';
 import Rating from '../rating/rating';
 
-const PlaceCard = ({offer, cardType}) => {
+const PlaceCard = ({offer, cardType, updateHoveredId}) => {
   const {id, isPremium = false, imagePreview, price, isFavorite, rating, title, type} = offer;
 
+  const handleMouseEnter = (evt) => {
+    const {cartId} = evt.target.closest(`ARTICLE`).dataset;
+    updateHoveredId(Number(cartId));
+  };
+
+  const handleMouseLeave = () => {
+    updateHoveredId(null);
+  };
+
   return (
-    <article className={`${cardTypesParams[cardType].MIX_CLASS || ``} place-card`}>
+    <article className={`${cardTypesParams[cardType].MIX_CLASS || ``} place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} data-cart-id={id}>
       {isPremium && <PremiumMark type={markPremiumTypes.CARD}/>}
       <div className={`${cardTypesParams[cardType].IMAGE_WRAP_CLASS || ``} place-card__image-wrapper`}>
         <Link to={`/offer/${id}`}>
@@ -43,6 +54,14 @@ const PlaceCard = ({offer, cardType}) => {
 PlaceCard.propTypes = {
   offer: propsOffer,
   cardType: PropTypes.string.isRequired,
+  updateHoveredId: PropTypes.func,
 };
 
-export default PlaceCard;
+const mapDispatchToProps = (dispatch) => ({
+  updateHoveredId(id) {
+    dispatch(ActionCreator.updateHoveredOfferId(id));
+  },
+});
+
+export {PlaceCard};
+export default connect(null, mapDispatchToProps)(PlaceCard);
