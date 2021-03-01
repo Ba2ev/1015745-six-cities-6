@@ -56,6 +56,11 @@ export const routes = {
   OFFER: `/offer/:id`,
 };
 
+export const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};
+
 export const markPremiumTypes = {
   CARD: `CARD`,
   PROPERTY: `PROPERTY`,

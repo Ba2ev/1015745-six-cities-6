@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 export const propsOffer = PropTypes.shape(
     {
-      adultsMax: PropTypes.number.isRequired,
+      maxAdults: PropTypes.number.isRequired,
       bedrooms: PropTypes.number.isRequired,
       city: PropTypes.shape({
         name: PropTypes.string.isRequired,
@@ -21,7 +21,7 @@ export const propsOffer = PropTypes.shape(
         name: PropTypes.string.isRequired
       }),
       id: PropTypes.number.isRequired,
-      imagePreview: PropTypes.string.isRequired,
+      previewImage: PropTypes.string.isRequired,
       images: PropTypes.arrayOf(PropTypes.string),
       isFavorite: PropTypes.bool.isRequired,
       isPremium: PropTypes.bool.isRequired,

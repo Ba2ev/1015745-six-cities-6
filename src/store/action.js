@@ -3,6 +3,7 @@ export const ActionType = {
   UPDATE_SORT: `sort/updateSort`,
   TOGGLE_SORTLIST: `sort/toggleSortList`,
   UPDATE_HOVERED_OFFER_ID: `offer/updateHoveredOfferId`,
+  LOAD_OFFERS: `offers/loadOffers`,
 };
 
 export const ActionCreator = {
@@ -20,5 +21,9 @@ export const ActionCreator = {
   updateHoveredOfferId: (id) => ({
     type: ActionType.UPDATE_HOVERED_OFFER_ID,
     payload: id
+  }),
+  loadOffers: (offers) => ({
+    type: ActionType.LOAD_OFFERS,
+    payload: offers
   }),
 };
