@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const PropertyFeatures = ({type, bedrooms, adultsMax}) => {
+const PropertyFeatures = ({type, bedrooms, maxAdults}) => {
   return (
     <ul className="property__features">
       <li className="property__feature property__feature--entire">
@@ -11,7 +11,7 @@ const PropertyFeatures = ({type, bedrooms, adultsMax}) => {
         {`${bedrooms} Bedrooms`}
       </li>
       <li className="property__feature property__feature--adults">
-        {`Max ${adultsMax} adults`}
+        {`Max ${maxAdults} adults`}
       </li>
     </ul>
   );
@@ -20,7 +20,7 @@ const PropertyFeatures = ({type, bedrooms, adultsMax}) => {
 PropertyFeatures.propTypes = {
   type: PropTypes.string.isRequired,
   bedrooms: PropTypes.number.isRequired,
-  adultsMax: PropTypes.number.isRequired,
+  maxAdults: PropTypes.number.isRequired,
 };
 
 export default PropertyFeatures;

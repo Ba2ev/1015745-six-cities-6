@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {propsOffers} from '../../props-validation';
@@ -6,8 +6,23 @@ import Locations from '../../locations';
 import Header from '../../layouts/header/header';
 import CitiesEmpty from '../../cities-empty';
 import Cities from '../../cities';
+import LoadingScreen from '../../loading-screen';
+import {fetchOffers} from "../../../store/api-actions";
 
-const MainPage = ({city, offers}) => {
+const MainPage = ({city, offers, isDataLoaded, onLoadData}) => {
+
+  useEffect(() => {
+    if (!isDataLoaded) {
+      onLoadData();
+    }
+  }, [isDataLoaded]);
+
+  if (!isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
   const cityOffers = offers.filter(({city: {name}}) => name === city);
 
   return (
@@ -28,12 +43,21 @@ const MainPage = ({city, offers}) => {
 MainPage.propTypes = {
   city: PropTypes.string.isRequired,
   offers: propsOffers,
+  isDataLoaded: PropTypes.bool.isRequired,
+  onLoadData: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   city: state.city,
   offers: state.offers,
+  isDataLoaded: state.isDataLoaded,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onLoadData() {
+    dispatch(fetchOffers());
+  },
 });
 
 export {MainPage};
-export default connect(mapStateToProps)(MainPage);
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

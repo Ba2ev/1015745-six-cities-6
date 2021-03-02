@@ -1,13 +1,13 @@
 import {ActionType} from './action';
 import {locations, sortTypes} from '../const';
-import {offers} from '../mock';
 
 const initialState = {
   city: locations[0].name,
-  offers,
+  offers: [],
   currentSort: sortTypes.POPULAR,
   isSortOpened: false,
   hoveredOffer: null,
+  isDataLoaded: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -31,6 +31,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         hoveredOffer: action.payload,
+      };
+    case ActionType.LOAD_OFFERS:
+      return {
+        ...state,
+        offers: action.payload,
+        isDataLoaded: true
       };
     default:
       return state;

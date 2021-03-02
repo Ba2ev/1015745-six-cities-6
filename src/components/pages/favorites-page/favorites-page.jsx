@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {propsOffers} from '../../props-validation';
 import Header from '../../layouts/header/header';
 import Footer from '../../layouts/footer/footer';
@@ -27,4 +28,13 @@ FavoritesPage.propTypes = {
   offers: propsOffers,
 };
 
-export default FavoritesPage;
+const mapStateToProps = (state) => {
+  const favoriteOffers = state.offers.filter((offer) => offer.isFavorite);
+
+  return {
+    offers: favoriteOffers,
+  };
+};
+
+export {FavoritesPage};
+export default connect(mapStateToProps)(FavoritesPage);

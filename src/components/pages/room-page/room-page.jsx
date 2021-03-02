@@ -1,9 +1,10 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {propsOffer} from '../../props-validation';
 import {nearOffers, reviews} from '../../../mock';
 import {markPremiumTypes, mapTypes, ratingTypes, bookmarkBtnTypes} from '../../../const';
 import Header from '../../layouts/header/header';
-import ImageList from '../../image-list/image-list';
+import ImageList from '../../image-list';
 import PremiumMark from '../../premium-mark';
 import Rating from '../../rating/rating';
 import BookmarkBtn from '../../bookmark-btn';
@@ -15,8 +16,7 @@ import Reviews from '../../reviews';
 import NearPlaces from '../../near-places';
 
 const RoomPage = ({offer}) => {
-
-  const {images, isPremium, title, isFavorite, rating, type, bedrooms, adultsMax, price, goods, host, description, location} = offer;
+  const {images, isPremium, title, isFavorite, rating, type, bedrooms, maxAdults, price, goods, host, description, location} = offer;
 
   const pointsParams = nearOffers.map((nearOffer) => ({
     title: nearOffer.title,
@@ -29,7 +29,7 @@ const RoomPage = ({offer}) => {
 
       <main className="page__main page__main--property">
         <section className="property">
-          <ImageList images={images}/>
+          <ImageList images={images} limit={6}/>
           <div className="property__container container">
             <div className="property__wrapper">
               {
@@ -42,7 +42,7 @@ const RoomPage = ({offer}) => {
                 <BookmarkBtn btnType={bookmarkBtnTypes.PROPERTY} isFavorite={isFavorite}/>
               </div>
               <Rating rating={rating} type={ratingTypes.PROPERTY} isValueShowed/>
-              <PropertyFeatures type={type} bedrooms={bedrooms} adultsMax={adultsMax}/>
+              <PropertyFeatures type={type} bedrooms={bedrooms} maxAdults={maxAdults}/>
               <div className="property__price">
                 <b className="property__price-value">&euro;{price}</b>
                 <span className="property__price-text">&nbsp;night</span>
@@ -68,4 +68,13 @@ RoomPage.propTypes = {
   offer: propsOffer
 };
 
-export default RoomPage;
+const mapStateToProps = (state, props) => {
+  const currentOffer = state.offers.find((offer) => offer.id === Number(props.id));
+
+  return {
+    offer: currentOffer,
+  };
+};
+
+export {RoomPage};
+export default connect(mapStateToProps)(RoomPage);

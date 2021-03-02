@@ -10,7 +10,7 @@ import BookmarkBtn from '../bookmark-btn';
 import Rating from '../rating/rating';
 
 const PlaceCard = ({offer, cardType, updateHoveredId}) => {
-  const {id, isPremium = false, imagePreview, price, isFavorite, rating, title, type} = offer;
+  const {id, isPremium = false, previewImage, price, isFavorite, rating, title, type} = offer;
 
   const handleMouseEnter = (evt) => {
     const {cartId} = evt.target.closest(`ARTICLE`).dataset;
@@ -27,7 +27,7 @@ const PlaceCard = ({offer, cardType, updateHoveredId}) => {
       <div className={`${cardTypesParams[cardType].IMAGE_WRAP_CLASS || ``} place-card__image-wrapper`}>
         <Link to={`/offer/${id}`}>
           <img className="place-card__image"
-            src={`img/${imagePreview}.jpg`}
+            src={`${previewImage}`}
             width={`${cardTypesParams[cardType].IMAGE_WIDTH}`}
             height={`${cardTypesParams[cardType].IMAGE_HEIGHT}`}
             alt="Place image"/>
