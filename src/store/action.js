@@ -4,6 +4,8 @@ export const ActionType = {
   TOGGLE_SORTLIST: `sort/toggleSortList`,
   UPDATE_HOVERED_OFFER_ID: `offer/updateHoveredOfferId`,
   LOAD_OFFERS: `offers/loadOffers`,
+  REQUIRED_AUTHORIZATION: `user/requiredAuthorization`,
+  UPDATE_ACCOUNT: `user/updateAccount`,
 };
 
 export const ActionCreator = {
@@ -25,5 +27,13 @@ export const ActionCreator = {
   loadOffers: (offers) => ({
     type: ActionType.LOAD_OFFERS,
     payload: offers
+  }),
+  requireAuthorization: (status) => ({
+    type: ActionType.REQUIRED_AUTHORIZATION,
+    payload: status,
+  }),
+  updateAccount: (email) => ({
+    type: ActionType.UPDATE_ACCOUNT,
+    payload: email,
   }),
 };

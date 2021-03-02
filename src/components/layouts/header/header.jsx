@@ -1,24 +1,23 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {AuthorizationStatus} from '../../../const';
+import LoginLink from '../../login-link';
+import LogoLink from '../../logo-link';
+import AccountLink from '../../account-link';
 
-const Header = () => {
+const Header = ({isAuth, account}) => {
   return (
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Link className="header__logo-link" to="/">
-              <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-            </Link>
+            <LogoLink />
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                <a className="header__nav-link header__nav-link--profile" href="#">
-                  <div className="header__avatar-wrapper user__avatar-wrapper">
-                  </div>
-                  <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                </a>
+                {isAuth ? <AccountLink account={account} /> : <LoginLink /> }
               </li>
             </ul>
           </nav>
@@ -28,4 +27,21 @@ const Header = () => {
   );
 };
 
-export default Header;
+Header.propTypes = {
+  isAuth: PropTypes.bool.isRequired,
+  account: PropTypes.string,
+};
+
+
+const mapStateToProps = (state) => {
+  const isAuth = state.authorizationStatus === AuthorizationStatus.AUTH;
+
+  return {
+    isAuth,
+    account: state.account
+  };
+};
+
+
+export {Header};
+export default connect(mapStateToProps)(Header);

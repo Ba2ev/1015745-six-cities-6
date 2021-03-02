@@ -1,6 +1,7 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import {routes} from '../../const';
+import PrivateRoute from '../private-route';
 import MainPage from '../pages/main-page';
 import LoginPage from '../pages/login-page';
 import FavoritesPage from '../pages/favorites-page';
@@ -17,9 +18,11 @@ const App = () => {
         <Route exact path={routes.LOGIN}>
           <LoginPage/>
         </Route>
-        <Route excat path={routes.FAVORITES}>
-          <FavoritesPage />
-        </Route>
+        <PrivateRoute exact
+          path={routes.FAVORITES}
+          render={() => <FavoritesPage />}
+        >
+        </PrivateRoute>
         <Route exact
           path={routes.OFFER}
           render= { ({match}) => <RoomPage id={match.params.id}/> }>
