@@ -65,7 +65,7 @@ const RoomPage = ({offer}) => {
 };
 
 RoomPage.propTypes = {
-  offer: propsOffer
+  offer: propsOffer,
 };
 
 const mapStateToProps = (state, props) => {
