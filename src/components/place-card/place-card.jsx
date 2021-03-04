@@ -3,13 +3,15 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {propsOffer} from '../props-validation';
 import {ActionCreator} from '../../store/action';
+import {toggleToFavorites} from "../../store/api-actions";
 import {markPremiumTypes, cardTypesParams, ratingTypes, bookmarkBtnTypes} from '../../const';
 import {Link} from 'react-router-dom';
 import PremiumMark from '../premium-mark';
 import BookmarkBtn from '../bookmark-btn';
 import Rating from '../rating/rating';
 
-const PlaceCard = ({offer, cardType, updateHoveredId}) => {
+const PlaceCard = ({offer, cardType, updateHoveredId, onFavoriteClick}) => {
+
   const {id, isPremium = false, previewImage, price, isFavorite, rating, title, type} = offer;
 
   const handleMouseEnter = (evt) => {
@@ -19,6 +21,14 @@ const PlaceCard = ({offer, cardType, updateHoveredId}) => {
 
   const handleMouseLeave = () => {
     updateHoveredId(null);
+  };
+
+  const handleFavoriteClick = (evt) => {
+    evt.preventDefault();
+    onFavoriteClick({
+      id,
+      status: Number(!isFavorite)
+    });
   };
 
   return (
@@ -39,7 +49,7 @@ const PlaceCard = ({offer, cardType, updateHoveredId}) => {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <BookmarkBtn btnType={bookmarkBtnTypes.PLACES} isFavorite={isFavorite}/>
+          <BookmarkBtn btnType={bookmarkBtnTypes.PLACES} isFavorite={isFavorite} onButtonClick={handleFavoriteClick}/>
         </div>
         <Rating rating={rating} type={ratingTypes.CARD}/>
         <h2 className="place-card__name">
@@ -55,12 +65,16 @@ PlaceCard.propTypes = {
   offer: propsOffer,
   cardType: PropTypes.string.isRequired,
   updateHoveredId: PropTypes.func,
+  onFavoriteClick: PropTypes.func,
 };
 
 const mapDispatchToProps = (dispatch) => ({
   updateHoveredId(id) {
     dispatch(ActionCreator.updateHoveredOfferId(id));
   },
+  onFavoriteClick(favoriteData) {
+    dispatch(toggleToFavorites(favoriteData));
+  }
 });
 
 export {PlaceCard};

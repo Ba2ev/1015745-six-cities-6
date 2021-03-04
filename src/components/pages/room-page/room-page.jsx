@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 import {propsOffer} from '../../props-validation';
-import {nearOffers, reviews} from '../../../mock';
 import {markPremiumTypes, mapTypes, ratingTypes, bookmarkBtnTypes} from '../../../const';
-import Header from '../../layouts/header/header';
+import LoadingScreen from '../../loading-screen';
+import {fetchOfferData, fetchOfferComments, fetchOfferNearby} from "../../../store/api-actions";
+import Header from '../../layouts/header';
 import ImageList from '../../image-list';
 import PremiumMark from '../../premium-mark';
 import Rating from '../../rating/rating';
@@ -15,13 +17,31 @@ import Map from '../../map';
 import Reviews from '../../reviews';
 import NearPlaces from '../../near-places';
 
-const RoomPage = ({offer}) => {
-  const {images, isPremium, title, isFavorite, rating, type, bedrooms, maxAdults, price, goods, host, description, location} = offer;
+const RoomPage = ({id, data, comments, nearOffers, onLoadOfferData, onLoadComments, onLoadNearby}) => {
 
-  const pointsParams = nearOffers.map((nearOffer) => ({
-    title: nearOffer.title,
-    location: nearOffer.location
-  }));
+  useEffect(() => {
+
+    if (!data) {
+      onLoadOfferData(id);
+    }
+
+    if (!comments) {
+      onLoadComments(id);
+    }
+
+    if (!nearOffers) {
+      onLoadNearby(id);
+    }
+
+  }, [data, comments, nearOffers]);
+
+  if (!data || !comments || !nearOffers) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
+  const {images, isPremium, title, isFavorite, rating, type, bedrooms, maxAdults, price, goods, host, description, location} = data;
 
   return (
     <div className="page">
@@ -51,10 +71,12 @@ const RoomPage = ({offer}) => {
                 <GoodList goods={goods}/>
               </div>
               <PropertyHost host={host} description={description}/>
-              <Reviews reviews={reviews}/>
+
+              <Reviews reviews={comments}/>
+
             </div>
           </div>
-          <Map place={location} points={pointsParams} mapType={mapTypes.PROPERTY}/>
+          <Map place={{...location, title}} points={nearOffers} mapType={mapTypes.PROPERTY}/>
         </section>
         <div className="container">
           <NearPlaces offers={nearOffers}/>
@@ -65,16 +87,38 @@ const RoomPage = ({offer}) => {
 };
 
 RoomPage.propTypes = {
-  offer: propsOffer,
+  id: PropTypes.string.isRequired,
+  data: propsOffer,
+  comments: PropTypes.array,
+  nearOffers: PropTypes.array,
+  onLoadOfferData: PropTypes.func.isRequired,
+  onLoadComments: PropTypes.func.isRequired,
+  onLoadNearby: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state, props) => {
-  const currentOffer = state.offers.find((offer) => offer.id === Number(props.id));
+const mapStateToProps = ({currentOffer}, props) => {
+
+  const isNeeedUpdate = !currentOffer.data || (currentOffer.data.id !== Number(props.id));
 
   return {
-    offer: currentOffer,
+    id: props.id,
+    data: isNeeedUpdate ? null : currentOffer.data,
+    comments: isNeeedUpdate ? null : currentOffer.comments,
+    nearOffers: isNeeedUpdate ? null : currentOffer.nearOffers,
   };
 };
 
+const mapDispatchToProps = (dispatch) => ({
+  onLoadOfferData(id) {
+    dispatch(fetchOfferData(id));
+  },
+  onLoadComments(id) {
+    dispatch(fetchOfferComments(id));
+  },
+  onLoadNearby(id) {
+    dispatch(fetchOfferNearby(id));
+  }
+});
+
 export {RoomPage};
-export default connect(mapStateToProps)(RoomPage);
+export default connect(mapStateToProps, mapDispatchToProps)(RoomPage);

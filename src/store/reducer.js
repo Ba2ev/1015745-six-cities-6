@@ -1,9 +1,17 @@
 import {ActionType} from './action';
 import {locations, sortTypes, AuthorizationStatus} from '../const';
+import {changeFavoriteOffers, getFavoritesOffers} from '../offer';
 
 const initialState = {
   city: locations[0].name,
   offers: [],
+  favoritesOffers: [],
+  isFavoritesLoaded: false,
+  currentOffer: {
+    data: null,
+    comments: null,
+    nearOffers: null,
+  },
   currentSort: sortTypes.POPULAR,
   isSortOpened: false,
   hoveredOffer: null,
@@ -38,7 +46,44 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         offers: action.payload,
+        favoritesOffers: getFavoritesOffers(action.payload),
         isDataLoaded: true
+      };
+    case ActionType.LOAD_FAVORITES_OFFERS:
+      return {
+        ...state,
+        favoritesOffers: action.payload,
+        isFavoritesLoaded: true,
+      };
+    case ActionType.UPDATE_FAVORITES_OFFERS:
+      return {
+        ...state,
+        favoritesOffers: changeFavoriteOffers(state.favoritesOffers, action.payload),
+        isDataLoaded: false,
+      };
+    case ActionType.LOAD_OFFER_DATA:
+      return {
+        ...state,
+        currentOffer: {
+          ...state.currentOffer,
+          data: action.payload,
+        },
+      };
+    case ActionType.LOAD_OFFER_COMMENTS:
+      return {
+        ...state,
+        currentOffer: {
+          ...state.currentOffer,
+          comments: action.payload,
+        },
+      };
+    case ActionType.LOAD_OFFER_NEARBY:
+      return {
+        ...state,
+        currentOffer: {
+          ...state.currentOffer,
+          nearOffers: action.payload,
+        },
       };
     case ActionType.REQUIRED_AUTHORIZATION:
       return {
