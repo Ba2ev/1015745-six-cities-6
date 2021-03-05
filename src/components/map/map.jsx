@@ -73,7 +73,7 @@ const Map = ({place, points, mapType, hoveredOffer}) => {
 
   return (
     <section className={`${mapTypesParams[mapType].mixClass || ``} map`}>
-      <div id="map" style={{height: `${mapTypesParams[mapType].height}px`}} ref={mapRef}></div>
+      <div id="map" style={{height: `${mapTypesParams[mapType].height}`}} ref={mapRef}></div>
     </section>
   );
 };

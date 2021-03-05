@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {propsOffers} from '../props-validation';
 import FavoriteList from '../favorite-list';
 
@@ -15,4 +16,9 @@ Favorites.propTypes = {
   offers: propsOffers,
 };
 
-export default Favorites;
+const mapStateToProps = (state) => ({
+  offers: state.favoritesOffers,
+});
+
+
+export default connect(mapStateToProps)(Favorites);

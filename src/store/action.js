@@ -37,10 +37,6 @@ export const ActionCreator = {
     type: ActionType.LOAD_FAVORITES_OFFERS,
     payload: offers
   }),
-  loadOfferNearby: (nearblyOffers) => ({
-    type: ActionType.LOAD_OFFER_NEARBY,
-    payload: nearblyOffers
-  }),
   loadOfferData: (offerData) => ({
     type: ActionType.LOAD_OFFER_DATA,
     payload: offerData
@@ -48,6 +44,10 @@ export const ActionCreator = {
   loadOfferComments: (offerComments) => ({
     type: ActionType.LOAD_OFFER_COMMENTS,
     payload: offerComments
+  }),
+  loadOfferNearby: (nearblyOffers) => ({
+    type: ActionType.LOAD_OFFER_NEARBY,
+    payload: nearblyOffers
   }),
   updateFavoriteOffers: (offerData) => ({
     type: ActionType.UPDATE_FAVORITES_OFFERS,

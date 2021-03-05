@@ -5,17 +5,20 @@ import {changeFavoriteOffers, getFavoritesOffers} from '../offer';
 const initialState = {
   city: locations[0].name,
   offers: [],
+  isDataLoaded: false,
   favoritesOffers: [],
   isFavoritesLoaded: false,
   currentOffer: {
     data: null,
     comments: null,
     nearOffers: null,
+    isDataLoaded: false,
+    isCoomentsLoaded: false,
+    isNearbyLoaded: false,
   },
   currentSort: sortTypes.POPULAR,
   isSortOpened: false,
   hoveredOffer: null,
-  isDataLoaded: false,
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   account: ``,
 };
@@ -67,6 +70,7 @@ const reducer = (state = initialState, action) => {
         currentOffer: {
           ...state.currentOffer,
           data: action.payload,
+          isDataLoaded: true,
         },
       };
     case ActionType.LOAD_OFFER_COMMENTS:
@@ -75,6 +79,7 @@ const reducer = (state = initialState, action) => {
         currentOffer: {
           ...state.currentOffer,
           comments: action.payload,
+          isCoomentsLoaded: true,
         },
       };
     case ActionType.LOAD_OFFER_NEARBY:
@@ -83,6 +88,7 @@ const reducer = (state = initialState, action) => {
         currentOffer: {
           ...state.currentOffer,
           nearOffers: action.payload,
+          isNearbyLoaded: true,
         },
       };
     case ActionType.REQUIRED_AUTHORIZATION:

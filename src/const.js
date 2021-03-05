@@ -61,6 +61,13 @@ export const AuthorizationStatus = {
   NO_AUTH: `NO_AUTH`,
 };
 
+export const sortTypes = {
+  POPULAR: `Popular`,
+  PRICE_LOW: `Price: low to high`,
+  PRICE_HIGH: `Price: high to low`,
+  RATING: `Top rated first`
+};
+
 export const markPremiumTypes = {
   CARD: `CARD`,
   PROPERTY: `PROPERTY`,
@@ -191,14 +198,14 @@ export const mapTypesParams = {
     iconUrl: `./img/pin.svg`,
     iconActiveUrl: `./img/pin-active.svg`,
     iconSize: [30, 30],
-    height: 736,
+    height: `100%`,
   },
   PROPERTY: {
     mixClass: `property__map`,
     iconUrl: `./img/pin.svg`,
     iconActiveUrl: `./img/pin-active.svg`,
     iconSize: [30, 30],
-    height: 579,
+    height: `579px`,
   },
 };
 
@@ -230,9 +237,20 @@ export const userTypesParams = {
   },
 };
 
-export const sortTypes = {
-  POPULAR: `Popular`,
-  PRICE_LOW: `Price: low to high`,
-  PRICE_HIGH: `Price: high to low`,
-  RATING: `Top rated first`
+export const logoLinkTypes = {
+  HEADER: `HEADER`,
+  FOOTER: `FOOTER`,
+};
+
+export const logoLinkTypesParams = {
+  HEADER: {
+    MIX_CLASS: `header`,
+    IMAGE_WIDTH: 81,
+    IMAGE_HEIGHT: 81,
+  },
+  FOOTER: {
+    MIX_CLASS: `footer`,
+    IMAGE_WIDTH: 64,
+    IMAGE_HEIGHT: 33,
+  },
 };

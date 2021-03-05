@@ -15,6 +15,7 @@ const ReviewForm = ({id, onSubmit}) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
+    const {target: form} = evt;
 
     onSubmit({
       id,
@@ -22,6 +23,7 @@ const ReviewForm = ({id, onSubmit}) => {
       comment: reviewForm.review,
     });
 
+    form.reset();
   };
 
   const handleFieldChange = (evt) => {
