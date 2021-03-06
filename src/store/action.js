@@ -4,6 +4,11 @@ export const ActionType = {
   TOGGLE_SORTLIST: `sort/toggleSortList`,
   UPDATE_HOVERED_OFFER_ID: `offer/updateHoveredOfferId`,
   LOAD_OFFERS: `offers/loadOffers`,
+  LOAD_FAVORITES_OFFERS: `offers/loadFavoritesOffers`,
+  UPDATE_FAVORITES_OFFERS: `offers/updateFavoritesOffers`,
+  LOAD_OFFER_DATA: `offer/loadOfferData`,
+  LOAD_OFFER_COMMENTS: `offer/loadOfferComments`,
+  LOAD_OFFER_NEARBY: `offer/loadOfferNearby`,
   REQUIRED_AUTHORIZATION: `user/requiredAuthorization`,
   UPDATE_ACCOUNT: `user/updateAccount`,
 };
@@ -28,6 +33,26 @@ export const ActionCreator = {
     type: ActionType.LOAD_OFFERS,
     payload: offers
   }),
+  loadFavoritesOffer: (offers) => ({
+    type: ActionType.LOAD_FAVORITES_OFFERS,
+    payload: offers
+  }),
+  loadOfferData: (offerData) => ({
+    type: ActionType.LOAD_OFFER_DATA,
+    payload: offerData
+  }),
+  loadOfferComments: (offerComments) => ({
+    type: ActionType.LOAD_OFFER_COMMENTS,
+    payload: offerComments
+  }),
+  loadOfferNearby: (nearblyOffers) => ({
+    type: ActionType.LOAD_OFFER_NEARBY,
+    payload: nearblyOffers
+  }),
+  updateFavoriteOffers: (offerData) => ({
+    type: ActionType.UPDATE_FAVORITES_OFFERS,
+    payload: offerData
+  }),
   requireAuthorization: (status) => ({
     type: ActionType.REQUIRED_AUTHORIZATION,
     payload: status,
@@ -37,3 +62,4 @@ export const ActionCreator = {
     payload: email,
   }),
 };
+

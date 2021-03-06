@@ -2,49 +2,49 @@ export const locations = [
   {
     name: `Paris`,
     point: {
-      latitude: 48.86268,
-      longitude: 2.33779,
-      zoom: 10,
+      latitude: 48.85661,
+      longitude: 2.351499,
+      zoom: 13,
     }
   },
   {
     name: `Cologne`,
     point: {
-      latitude: 50.94724,
-      longitude: 6.95976,
-      zoom: 10,
+      latitude: 50.938361,
+      longitude: 6.959974,
+      zoom: 13,
     }
   },
   {
     name: `Brussels`,
     point: {
-      latitude: 50.84889,
-      longitude: 4.35136,
-      zoom: 10,
+      latitude: 50.846557,
+      longitude: 4.351697,
+      zoom: 13,
     }
   },
   {
     name: `Amsterdam`,
     point: {
-      latitude: 52.370216,
-      longitude: 4.895168,
-      zoom: 10,
+      latitude: 52.37454,
+      longitude: 4.897976,
+      zoom: 13,
     }
   },
   {
     name: `Hamburg`,
     point: {
-      latitude: 53.558490,
-      longitude: 9.787741,
-      zoom: 10,
+      latitude: 53.550341,
+      longitude: 10.000654,
+      zoom: 13,
     }
   },
   {
     name: `Dusseldorf`,
     point: {
-      latitude: 51.238371,
-      longitude: 6.674269,
-      zoom: 10,
+      latitude: 51.225402,
+      longitude: 6.776314,
+      zoom: 13,
     }
   }
 ];
@@ -59,6 +59,13 @@ export const routes = {
 export const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
+};
+
+export const sortTypes = {
+  POPULAR: `Popular`,
+  PRICE_LOW: `Price: low to high`,
+  PRICE_HIGH: `Price: high to low`,
+  RATING: `Top rated first`
 };
 
 export const markPremiumTypes = {
@@ -191,14 +198,14 @@ export const mapTypesParams = {
     iconUrl: `./img/pin.svg`,
     iconActiveUrl: `./img/pin-active.svg`,
     iconSize: [30, 30],
-    height: 736,
+    height: `100%`,
   },
   PROPERTY: {
     mixClass: `property__map`,
     iconUrl: `./img/pin.svg`,
-    iconActiveUrl: `./img/img/pin-active.svg`,
+    iconActiveUrl: `./img/pin-active.svg`,
     iconSize: [30, 30],
-    height: 579,
+    height: `579px`,
   },
 };
 
@@ -230,9 +237,20 @@ export const userTypesParams = {
   },
 };
 
-export const sortTypes = {
-  POPULAR: `Popular`,
-  PRICE_LOW: `Price: low to high`,
-  PRICE_HIGH: `Price: high to low`,
-  RATING: `Top rated first`
+export const logoLinkTypes = {
+  HEADER: `HEADER`,
+  FOOTER: `FOOTER`,
+};
+
+export const logoLinkTypesParams = {
+  HEADER: {
+    MIX_CLASS: `header`,
+    IMAGE_WIDTH: 81,
+    IMAGE_HEIGHT: 81,
+  },
+  FOOTER: {
+    MIX_CLASS: `footer`,
+    IMAGE_WIDTH: 64,
+    IMAGE_HEIGHT: 33,
+  },
 };

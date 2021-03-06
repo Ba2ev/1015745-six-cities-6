@@ -25,6 +25,23 @@ const Map = ({place, points, mapType, hoveredOffer}) => {
       })
       .addTo(mapRef.current);
 
+    const customIcon = leaflet.icon({
+      iconUrl: mapTypesParams[mapType].iconActiveUrl,
+      iconSize: mapTypesParams[mapType].iconSize
+    });
+
+    if (place.title) {
+      leaflet.marker({
+        lat: place.latitude,
+        lng: place.longitude
+      },
+      {
+        icon: customIcon
+      })
+      .bindPopup(place.title)
+      .addTo(mapRef.current);
+    }
+
     return () => {
       mapRef.current.remove();
     };
@@ -56,7 +73,7 @@ const Map = ({place, points, mapType, hoveredOffer}) => {
 
   return (
     <section className={`${mapTypesParams[mapType].mixClass || ``} map`}>
-      <div id="map" style={{height: `${mapTypesParams[mapType].height}px`}} ref={mapRef}></div>
+      <div id="map" style={{height: `${mapTypesParams[mapType].height}`}} ref={mapRef}></div>
     </section>
   );
 };
@@ -66,6 +83,7 @@ Map.propTypes = {
     latitude: PropTypes.number.isRequired,
     longitude: PropTypes.number.isRequired,
     zoom: PropTypes.number.isRequired,
+    title: PropTypes.string,
   }).isRequired,
   points: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,

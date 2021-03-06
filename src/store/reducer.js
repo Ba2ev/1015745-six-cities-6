@@ -1,13 +1,24 @@
 import {ActionType} from './action';
 import {locations, sortTypes, AuthorizationStatus} from '../const';
+import {changeFavoriteOffers, getFavoritesOffers} from '../offer';
 
 const initialState = {
   city: locations[0].name,
   offers: [],
+  isDataLoaded: false,
+  favoritesOffers: [],
+  isFavoritesLoaded: false,
+  currentOffer: {
+    data: null,
+    comments: null,
+    nearOffers: null,
+    isDataLoaded: false,
+    isCoomentsLoaded: false,
+    isNearbyLoaded: false,
+  },
   currentSort: sortTypes.POPULAR,
   isSortOpened: false,
   hoveredOffer: null,
-  isDataLoaded: false,
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   account: ``,
 };
@@ -38,7 +49,47 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         offers: action.payload,
+        favoritesOffers: getFavoritesOffers(action.payload),
         isDataLoaded: true
+      };
+    case ActionType.LOAD_FAVORITES_OFFERS:
+      return {
+        ...state,
+        favoritesOffers: action.payload,
+        isFavoritesLoaded: true,
+      };
+    case ActionType.UPDATE_FAVORITES_OFFERS:
+      return {
+        ...state,
+        favoritesOffers: changeFavoriteOffers(state.favoritesOffers, action.payload),
+        isDataLoaded: false,
+      };
+    case ActionType.LOAD_OFFER_DATA:
+      return {
+        ...state,
+        currentOffer: {
+          ...state.currentOffer,
+          data: action.payload,
+          isDataLoaded: true,
+        },
+      };
+    case ActionType.LOAD_OFFER_COMMENTS:
+      return {
+        ...state,
+        currentOffer: {
+          ...state.currentOffer,
+          comments: action.payload,
+          isCoomentsLoaded: true,
+        },
+      };
+    case ActionType.LOAD_OFFER_NEARBY:
+      return {
+        ...state,
+        currentOffer: {
+          ...state.currentOffer,
+          nearOffers: action.payload,
+          isNearbyLoaded: true,
+        },
       };
     case ActionType.REQUIRED_AUTHORIZATION:
       return {

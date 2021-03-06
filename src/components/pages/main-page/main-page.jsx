@@ -1,13 +1,12 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
+import {fetchOffers} from "../../../store/api-actions";
 import PropTypes from 'prop-types';
 import {propsOffers} from '../../props-validation';
-import Locations from '../../locations';
+import withLoadingScreen from '../../../hocs/withLoadingScreen';
 import Header from '../../layouts/header/header';
-import CitiesEmpty from '../../cities-empty';
-import Cities from '../../cities';
-import LoadingScreen from '../../loading-screen';
-import {fetchOffers} from "../../../store/api-actions";
+import Locations from '../../locations';
+import CitiesContainer from '../../cities-container';
 
 const MainPage = ({city, offers, isDataLoaded, onLoadData}) => {
 
@@ -17,12 +16,7 @@ const MainPage = ({city, offers, isDataLoaded, onLoadData}) => {
     }
   }, [isDataLoaded]);
 
-  if (!isDataLoaded) {
-    return (
-      <LoadingScreen />
-    );
-  }
-
+  const CitiesWithLoading = withLoadingScreen(CitiesContainer);
   const cityOffers = offers.filter(({city: {name}}) => name === city);
 
   return (
@@ -34,7 +28,7 @@ const MainPage = ({city, offers, isDataLoaded, onLoadData}) => {
         <div className="tabs">
           <Locations />
         </div>
-        { cityOffers.length ? <Cities /> : <CitiesEmpty />}
+        <CitiesWithLoading offers={offers} isLoaded={isDataLoaded} />
       </main>
     </div>
   );

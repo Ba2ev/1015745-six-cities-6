@@ -1,16 +1,13 @@
 import React, {useRef} from 'react';
-import {useHistory} from 'react-router-dom';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {login, logout} from "../../../store/api-actions";
+import {login} from "../../../store/api-actions";
 import Header from '../../layouts/header';
 
-const LoginPage = ({onSubmit, onSpanClick}) => {
+const LoginPage = ({onSubmit}) => {
 
   const loginRef = useRef();
   const passwordRef = useRef();
-
-  const history = useHistory();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -19,13 +16,6 @@ const LoginPage = ({onSubmit, onSpanClick}) => {
       login: loginRef.current.value,
       password: passwordRef.current.value,
     });
-
-    history.push(`/`);
-  };
-
-  const handleSpanClick = (evt) => {
-    evt.preventDefault();
-    onSpanClick();
   };
 
   return (
@@ -51,7 +41,7 @@ const LoginPage = ({onSubmit, onSpanClick}) => {
           <section className="locations locations--login locations--current">
             <div className="locations__item">
               <a className="locations__item-link" href="#">
-                <span onClick={handleSpanClick}>Amsterdam</span>
+                <span>Amsterdam</span>
               </a>
             </div>
           </section>
@@ -63,17 +53,13 @@ const LoginPage = ({onSubmit, onSpanClick}) => {
 };
 
 LoginPage.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  onSpanClick: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired
 };
 
 
 const mapDispatchToProps = (dispatch) => ({
   onSubmit(authData) {
     dispatch(login(authData));
-  },
-  onSpanClick() {
-    dispatch(logout());
   }
 });
 
