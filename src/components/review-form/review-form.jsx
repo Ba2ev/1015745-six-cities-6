@@ -51,8 +51,8 @@ ReviewForm.propTypes = {
   onSubmit: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({currentOffer}) => ({
-  id: currentOffer.data.id,
+const mapStateToProps = ({PROPERTY}) => ({
+  id: PROPERTY.data.id,
 });
 
 

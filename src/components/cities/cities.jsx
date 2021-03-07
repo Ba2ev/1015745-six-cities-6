@@ -27,12 +27,12 @@ Cities.propTypes = {
   offers: propsOffers,
 };
 
-const mapStateToProps = (state) => {
-  const cityOffers = state.offers.filter(({city: {name}}) => name === state.city);
-  const sortedOffers = sortOffers(cityOffers, state.currentSort);
+const mapStateToProps = ({PLACES}) => {
+  const cityOffers = PLACES.offers.filter(({city: {name}}) => name === PLACES.city);
+  const sortedOffers = sortOffers(cityOffers, PLACES.currentSort);
 
   return {
-    city: state.city,
+    city: PLACES.city,
     offers: sortedOffers,
   };
 };

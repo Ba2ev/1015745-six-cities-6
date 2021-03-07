@@ -96,8 +96,8 @@ Map.propTypes = {
   hoveredOffer: PropTypes.number
 };
 
-const mapStateToProps = (state) => ({
-  hoveredOffer: state.hoveredOffer,
+const mapStateToProps = ({PLACES}) => ({
+  hoveredOffer: PLACES.hoveredOffer,
 });
 
 export {Map};

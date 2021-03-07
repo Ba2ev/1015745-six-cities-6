@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {locations} from '../../const';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action';
+import {updateCity} from '../../store/action';
+import {locations} from '../../const';
 
-const Locations = ({city, updateCity}) => {
+const Locations = ({city, onUpdateCity}) => {
 
   const handleClick = (evt) => {
     const {textContent} = evt.target;
-    updateCity(textContent);
+    onUpdateCity(textContent);
   };
 
   return (
@@ -28,16 +28,16 @@ const Locations = ({city, updateCity}) => {
 
 Locations.propTypes = {
   city: PropTypes.string.isRequired,
-  updateCity: PropTypes.func.isRequired,
+  onUpdateCity: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  city: state.city
+const mapStateToProps = ({PLACES}) => ({
+  city: PLACES.city
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  updateCity(city) {
-    dispatch(ActionCreator.updateCity(city));
+  onUpdateCity(city) {
+    dispatch(updateCity(city));
   },
 });
 

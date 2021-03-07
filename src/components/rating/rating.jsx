@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 import {ratingTypesParams} from '../../const';
 
@@ -22,4 +22,8 @@ Rating.propTypes = {
   isValueShowed: PropTypes.bool,
 };
 
-export default Rating;
+export default memo(Rating, (prev, next) => {
+  const isEqual = prev.rating === next.rating && prev.type === next.type && prev.isValueShowed === next.isValueShowed;
+
+  return isEqual;
+});

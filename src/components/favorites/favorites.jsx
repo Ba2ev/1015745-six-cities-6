@@ -16,8 +16,8 @@ Favorites.propTypes = {
   offers: propsOffers,
 };
 
-const mapStateToProps = (state) => ({
-  offers: state.favoritesOffers,
+const mapStateToProps = ({PLACES}) => ({
+  offers: PLACES.favorites,
 });
 
 

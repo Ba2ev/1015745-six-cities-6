@@ -33,14 +33,10 @@ Header.propTypes = {
 };
 
 
-const mapStateToProps = (state) => {
-  const isAuth = state.authorizationStatus === AuthorizationStatus.AUTH;
-
-  return {
-    isAuth,
-    account: state.account
-  };
-};
+const mapStateToProps = ({USER}) => ({
+  isAuth: USER.authorizationStatus === AuthorizationStatus.AUTH,
+  account: USER.account,
+});
 
 
 export {Header};

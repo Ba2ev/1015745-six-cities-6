@@ -1,34 +1,39 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {propsOffer} from '../props-validation';
-import {ActionCreator} from '../../store/action';
-import {toggleToFavorites} from "../../store/api-actions";
-import {markPremiumTypes, cardTypesParams, ratingTypes, bookmarkBtnTypes} from '../../const';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {updateHoveredOfferId, redirectToRoute} from '../../store/action';
+import {toggleToFavorites} from "../../store/api-actions";
+import {markPremiumTypes, cardTypesParams, ratingTypes, bookmarkBtnTypes, AuthorizationStatus, routes} from '../../const';
 import PremiumMark from '../premium-mark';
 import BookmarkBtn from '../bookmark-btn';
 import Rating from '../rating/rating';
 
-const PlaceCard = ({offer, cardType, updateHoveredId, onFavoriteClick}) => {
+const PlaceCard = ({offer, cardType, onUpdateHoveredId, onFavoriteClick, isAuth, onRedirectToRoute}) => {
 
   const {id, isPremium = false, previewImage, price, isFavorite, rating, title, type} = offer;
 
   const handleMouseEnter = (evt) => {
     const {cartId} = evt.target.closest(`ARTICLE`).dataset;
-    updateHoveredId(Number(cartId));
+    onUpdateHoveredId(Number(cartId));
   };
 
   const handleMouseLeave = () => {
-    updateHoveredId(null);
+    onUpdateHoveredId(null);
   };
 
-  const handleFavoriteClick = (evt) => {
-    evt.preventDefault();
-    onFavoriteClick({
-      id,
-      status: Number(!isFavorite)
-    });
+  const handleFavoriteClick = () => {
+
+    if (isAuth) {
+      onFavoriteClick({
+        id,
+        status: Number(!isFavorite)
+      });
+    } else {
+      onRedirectToRoute(routes.LOGIN);
+    }
+
   };
 
   return (
@@ -64,18 +69,27 @@ const PlaceCard = ({offer, cardType, updateHoveredId, onFavoriteClick}) => {
 PlaceCard.propTypes = {
   offer: propsOffer,
   cardType: PropTypes.string.isRequired,
-  updateHoveredId: PropTypes.func,
+  onUpdateHoveredId: PropTypes.func,
   onFavoriteClick: PropTypes.func,
+  onRedirectToRoute: PropTypes.func,
+  isAuth: PropTypes.bool.isRequired,
 };
 
+const mapStateToProps = ({USER}) => ({
+  isAuth: USER.authorizationStatus === AuthorizationStatus.AUTH,
+});
+
 const mapDispatchToProps = (dispatch) => ({
-  updateHoveredId(id) {
-    dispatch(ActionCreator.updateHoveredOfferId(id));
+  onUpdateHoveredId(id) {
+    dispatch(updateHoveredOfferId(id));
   },
   onFavoriteClick(favoriteData) {
     dispatch(toggleToFavorites(favoriteData));
+  },
+  onRedirectToRoute(route) {
+    dispatch(redirectToRoute(route));
   }
 });
 
 export {PlaceCard};
-export default connect(null, mapDispatchToProps)(PlaceCard);
+export default connect(mapStateToProps, mapDispatchToProps)(PlaceCard);

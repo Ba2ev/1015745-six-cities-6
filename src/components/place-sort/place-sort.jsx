@@ -1,18 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {ActionCreator} from '../../store/action';
+import {updateSort} from '../../store/action';
 import {sortTypes} from '../../const';
 
-const PlaceSort = ({currentSort, isSortOpened, updateSort, toggleSortList}) => {
+const PlaceSort = ({currentSort, onUpdateSort}) => {
+
+  const [sortList, setSortList] = useState({
+    isOpened: false,
+  });
 
   const handleListClick = () => {
-    toggleSortList();
+    setSortList((prevState) => ({...prevState, isOpened: !sortList.isOpened}));
   };
 
   const handleSortTypeClick = (evt) => {
     const {textContent} = evt.target;
-    updateSort(textContent);
+    onUpdateSort(textContent);
+    setSortList((prevState) => ({...prevState, isOpened: false}));
   };
 
   return (
@@ -24,7 +29,7 @@ const PlaceSort = ({currentSort, isSortOpened, updateSort, toggleSortList}) => {
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
-      <ul className={`places__options places__options--custom ${isSortOpened ? `places__options--opened` : ``}`}>
+      <ul className={`places__options places__options--custom ${sortList.isOpened ? `places__options--opened` : ``}`}>
         {Object.values(sortTypes).map((type) => (
           <li key={type} className={`places__option ${currentSort === type ? `places__option--active` : ``}`} tabIndex="0" onClick={handleSortTypeClick}>{type}</li>
         ))}
@@ -35,24 +40,17 @@ const PlaceSort = ({currentSort, isSortOpened, updateSort, toggleSortList}) => {
 
 PlaceSort.propTypes = {
   currentSort: PropTypes.string.isRequired,
-  isSortOpened: PropTypes.bool.isRequired,
-  updateSort: PropTypes.func.isRequired,
-  toggleSortList: PropTypes.func.isRequired,
+  onUpdateSort: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  currentSort: state.currentSort,
-  isSortOpened: state.isSortOpened,
+const mapStateToProps = ({PLACES}) => ({
+  currentSort: PLACES.currentSort
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  updateSort(currentSort) {
-    dispatch(ActionCreator.updateSort(currentSort));
-    dispatch(ActionCreator.toggleSortList());
+  onUpdateSort(currentSort) {
+    dispatch(updateSort(currentSort));
   },
-  toggleSortList() {
-    dispatch(ActionCreator.toggleSortList());
-  }
 });
 
 export {PlaceSort};

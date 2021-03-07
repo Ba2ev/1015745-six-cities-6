@@ -12,23 +12,16 @@ const sortOfferRating = (eventA, eventB) => {
   return eventB.rating - eventA.rating;
 };
 
-const deleteOffer = (offers, updatedOffer) => {
-  const index = offers.findIndex((event) => event.id === updatedOffer.id);
-
-  if (index === -1) {
-    throw new Error(`Can't delete unexisting event`);
-  }
-
-  const newOffers = [
-    ...offers.slice(0, index),
-    ...offers.slice(index + 1)
-  ];
-
-  return newOffers;
+const deleteOffer = (offers, deletedOffer) => {
+  return offers.filter((offer) => offer.id !== deletedOffer.id);
 };
 
-export const getFavoritesOffers = (offers) => {
-  return offers.filter((offer) => offer.isFavorite);
+export const updateOffers = (offers, updatedOffer) => {
+  const offerIndex = offers.findIndex((offer) => offer.id === updatedOffer.id);
+
+  return [...offers.slice(0, offerIndex),
+    updatedOffer,
+    ...offers.slice(offerIndex + 1)];
 };
 
 export const sortOffers = (offers, sortType) => {
