@@ -1,9 +1,8 @@
 import React from 'react';
 import {Router as BrowserRouter, Switch, Route} from 'react-router-dom';
 import browserHistory from "../../browser-history";
-import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
-import {routes, AuthorizationStatus} from '../../const';
+import {useSelector} from 'react-redux';
+import {routes} from '../../const';
 import withPrivateRoute from '../../hocs/withPrivateRoute/';
 import MainPage from '../pages/main-page';
 import LoginPage from '../pages/login-page';
@@ -11,10 +10,12 @@ import FavoritesPage from '../pages/favorites-page';
 import RoomPage from '../pages/room-page';
 import NotFoundPage from '../pages/not-found-page';
 
-const App = ({isAuth}) => {
+const App = () => {
 
-  const FavoritesPrivateRoute = withPrivateRoute(FavoritesPage, isAuth);
-  const LoginPrivateRoute = withPrivateRoute(LoginPage, !isAuth, routes.MAIN);
+  const {isAuthorized} = useSelector((state) => state.USER);
+
+  const FavoritesPrivateRoute = withPrivateRoute(FavoritesPage, isAuthorized);
+  const LoginPrivateRoute = withPrivateRoute(LoginPage, !isAuthorized, routes.MAIN);
 
   return (
     <BrowserRouter history={browserHistory}>
@@ -40,14 +41,4 @@ const App = ({isAuth}) => {
   );
 };
 
-App.propTypes = {
-  isAuth: PropTypes.bool.isRequired,
-};
-
-const mapStateToProps = ({USER}) => ({
-  isAuth: USER.authorizationStatus === AuthorizationStatus.AUTH,
-});
-
-
-export {App};
-export default connect(mapStateToProps)(App);
+export default App;

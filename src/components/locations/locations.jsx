@@ -1,14 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {updateCity} from '../../store/action';
 import {locations} from '../../const';
 
-const Locations = ({city, onUpdateCity}) => {
+const Locations = () => {
+
+  const dispatch = useDispatch();
+
+  const {city} = useSelector((state) => state.DATA);
 
   const handleClick = (evt) => {
     const {textContent} = evt.target;
-    onUpdateCity(textContent);
+    dispatch(updateCity(textContent));
   };
 
   return (
@@ -26,20 +29,4 @@ const Locations = ({city, onUpdateCity}) => {
   );
 };
 
-Locations.propTypes = {
-  city: PropTypes.string.isRequired,
-  onUpdateCity: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = ({PLACES}) => ({
-  city: PLACES.city
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onUpdateCity(city) {
-    dispatch(updateCity(city));
-  },
-});
-
-export {Locations};
-export default connect(mapStateToProps, mapDispatchToProps)(Locations);
+export default Locations;

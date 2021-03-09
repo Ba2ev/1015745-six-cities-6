@@ -2,42 +2,40 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {propsOffer} from '../props-validation';
 import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
-import {updateHoveredOfferId, redirectToRoute} from '../../store/action';
-import {toggleToFavorites} from "../../store/api-actions";
-import {markPremiumTypes, cardTypesParams, ratingTypes, bookmarkBtnTypes, AuthorizationStatus, routes} from '../../const';
+import {useDispatch} from 'react-redux';
+import {updateHoveredOfferId} from '../../store/action';
+import {markPremiumTypes, cardTypes, cardTypesParams, ratingTypes, bookmarkBtnTypes} from '../../const';
 import PremiumMark from '../premium-mark';
 import BookmarkBtn from '../bookmark-btn';
-import Rating from '../rating/rating';
+import Rating from '../rating';
 
-const PlaceCard = ({offer, cardType, onUpdateHoveredId, onFavoriteClick, isAuth, onRedirectToRoute}) => {
+const PlaceCard = ({offer, cardType}) => {
+
+  const dispatch = useDispatch();
+
+  const isMainCard = cardType === cardTypes.CITIES;
 
   const {id, isPremium = false, previewImage, price, isFavorite, rating, title, type} = offer;
 
   const handleMouseEnter = (evt) => {
-    const {cartId} = evt.target.closest(`ARTICLE`).dataset;
-    onUpdateHoveredId(Number(cartId));
+    if (isMainCard) {
+      const {cartId} = evt.target.closest(`ARTICLE`).dataset;
+      dispatch(updateHoveredOfferId(Number(cartId)));
+    }
   };
 
   const handleMouseLeave = () => {
-    onUpdateHoveredId(null);
-  };
-
-  const handleFavoriteClick = () => {
-
-    if (isAuth) {
-      onFavoriteClick({
-        id,
-        status: Number(!isFavorite)
-      });
-    } else {
-      onRedirectToRoute(routes.LOGIN);
+    if (isMainCard) {
+      dispatch(updateHoveredOfferId(null));
     }
-
   };
 
   return (
-    <article className={`${cardTypesParams[cardType].MIX_CLASS || ``} place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} data-cart-id={id}>
+    <article
+      className={`${cardTypesParams[cardType].MIX_CLASS || ``} place-card`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      data-cart-id={id}>
       {isPremium && <PremiumMark type={markPremiumTypes.CARD}/>}
       <div className={`${cardTypesParams[cardType].IMAGE_WRAP_CLASS || ``} place-card__image-wrapper`}>
         <Link to={`/offer/${id}`}>
@@ -54,9 +52,14 @@ const PlaceCard = ({offer, cardType, onUpdateHoveredId, onFavoriteClick, isAuth,
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <BookmarkBtn btnType={bookmarkBtnTypes.PLACES} isFavorite={isFavorite} onButtonClick={handleFavoriteClick}/>
+          <BookmarkBtn
+            btnType={bookmarkBtnTypes.PLACES}
+            id={id}
+            isFavorite={isFavorite}/>
         </div>
-        <Rating rating={rating} type={ratingTypes.CARD}/>
+        <Rating
+          rating={rating}
+          type={ratingTypes.CARD}/>
         <h2 className="place-card__name">
           <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
@@ -69,27 +72,6 @@ const PlaceCard = ({offer, cardType, onUpdateHoveredId, onFavoriteClick, isAuth,
 PlaceCard.propTypes = {
   offer: propsOffer,
   cardType: PropTypes.string.isRequired,
-  onUpdateHoveredId: PropTypes.func,
-  onFavoriteClick: PropTypes.func,
-  onRedirectToRoute: PropTypes.func,
-  isAuth: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = ({USER}) => ({
-  isAuth: USER.authorizationStatus === AuthorizationStatus.AUTH,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onUpdateHoveredId(id) {
-    dispatch(updateHoveredOfferId(id));
-  },
-  onFavoriteClick(favoriteData) {
-    dispatch(toggleToFavorites(favoriteData));
-  },
-  onRedirectToRoute(route) {
-    dispatch(redirectToRoute(route));
-  }
-});
-
-export {PlaceCard};
-export default connect(mapStateToProps, mapDispatchToProps)(PlaceCard);
+export default PlaceCard;

@@ -1,19 +1,25 @@
 import React, {useEffect} from 'react';
-import {connect} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
 import {fetchOfferData, fetchOfferComments, fetchOfferNearby} from "../../../store/api-actions";
 import withLoadingScreen from "../../../hocs/withLoadingScreen";
 import Header from '../../layouts/header';
 import Property from '../../property';
 
+const PropertyWithLoading = withLoadingScreen(Property);
 
-const RoomPage = ({id, isLoaded, onLoadOffer}) => {
+const RoomPage = ({id}) => {
+
+  const dispatch = useDispatch();
+
+  const isLoaded = useSelector(({DATA}) => DATA.currentOffer.isInfoLoaded && DATA.currentOffer.isCoomentsLoaded && DATA.currentOffer.isNearbyLoaded
+  );
 
   useEffect(() => {
-    onLoadOffer(id);
+    dispatch(fetchOfferData(id));
+    dispatch(fetchOfferComments(id));
+    dispatch(fetchOfferNearby(id));
   }, [id, isLoaded]);
-
-  const PropertyWithLoading = withLoadingScreen(Property);
 
   return (
     <div className="page">
@@ -27,27 +33,6 @@ const RoomPage = ({id, isLoaded, onLoadOffer}) => {
 
 RoomPage.propTypes = {
   id: PropTypes.string,
-  isLoaded: PropTypes.bool,
-  onLoadOffer: PropTypes.func,
 };
 
-const mapStateToProps = ({PROPERTY}, props) => {
-
-  const isLoaded = PROPERTY.isInfoLoaded && PROPERTY.isCoomentsLoaded && PROPERTY.isNearbyLoaded;
-
-  return {
-    id: props.id,
-    isLoaded,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  onLoadOffer(id) {
-    dispatch(fetchOfferData(id));
-    dispatch(fetchOfferComments(id));
-    dispatch(fetchOfferNearby(id));
-  },
-});
-
-export {RoomPage};
-export default connect(mapStateToProps, mapDispatchToProps)(RoomPage);
+export default RoomPage;

@@ -6,7 +6,7 @@ export const ActionType = {
   UPDATE_HOVERED_PLACE_ID: `places/updateHoveredPlaceId`,
   UPDATE_SORT: `places/updateSort`,
   LOAD_FAVORITES_OFFERS: `favorites/loadFavorites`,
-  UPDATE_FAVORITES_OFFERS: `favorites/updateFavorites`,
+  UPDATE_OFFER_FAVORITE: `favorites/updateOfferFavorite`,
   LOAD_PROPERTY_DATA: `property/loadPropertyData`,
   LOAD_PROPERTY_COMMENTS: `property/loadPropertyComments`,
   LOAD_PROPERTY_NEARBY: `property/loadPropertyNearby`,
@@ -47,7 +47,7 @@ export const loadOfferNearby = createAction(ActionType.LOAD_PROPERTY_NEARBY, (ne
   payload: nearblyOffers,
 }));
 
-export const updateFavoriteOffers = createAction(ActionType.UPDATE_FAVORITES_OFFERS, (offerData) => ({
+export const updateOfferFavorite = createAction(ActionType.UPDATE_OFFER_FAVORITE, (offerData) => ({
   payload: offerData,
 }));
 

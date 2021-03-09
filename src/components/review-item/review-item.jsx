@@ -2,7 +2,7 @@ import React from 'react';
 import {getDateTimeFormat, getLocalizedDate} from '../../util';
 import {ratingTypes, userTypes} from '../../const';
 import User from '../user';
-import Rating from '../rating/rating';
+import Rating from '../rating';
 import PropTypes from 'prop-types';
 
 const ReviewItem = ({review}) => {

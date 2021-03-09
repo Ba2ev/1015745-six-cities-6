@@ -1,6 +1,5 @@
-import {loadOffers, loadOfferData, loadOfferComments, loadOfferNearby, loadFavoritesOffer, updateFavoriteOffers, requireAuthorization, updateAccount} from './action';
+import {loadOffers, loadOfferData, loadOfferComments, loadOfferNearby, loadFavoritesOffer, updateOfferFavorite, requireAuthorization, updateAccount} from './action';
 import {adaptOfferToClient, adaptCommentToClient} from '../adapter';
-import {AuthorizationStatus} from "../const";
 
 export const fetchOffers = () => (dispatch, _getState, api) => (
   api.get(`/hotels`)
@@ -32,10 +31,10 @@ export const fetchFavoritesOffer = () => (dispatch, _getState, api) => (
     .then((data) => dispatch(loadFavoritesOffer(data)))
 );
 
-export const toggleToFavorites = ({id, status}) => (dispatch, _getState, api) => (
+export const changeFavorite = ({id, status}) => (dispatch, _getState, api) => (
   api.post(`/favorite/${id}/${status}`)
     .then(({data}) => (adaptOfferToClient(data)))
-    .then((data) => dispatch(updateFavoriteOffers(data)))
+    .then((data) => dispatch(updateOfferFavorite(data)))
 );
 
 export const sendComment = ({id, comment, rating}) => (dispatch, _getState, api) => (
@@ -47,18 +46,18 @@ export const sendComment = ({id, comment, rating}) => (dispatch, _getState, api)
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(`/login`)
     .then(({data}) => dispatch(updateAccount(data.email)))
-    .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
+    .then(() => dispatch(requireAuthorization(true)))
     .catch(() => {})
 );
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
   api.post(`/login`, {email, password})
-    .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
+    .then(() => dispatch(requireAuthorization(true)))
     .then(() => dispatch(updateAccount(email)))
 );
 
 export const logout = () => (dispatch, _getState, api) => (
   api.get(`/logout`)
-    .then(() => dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH)))
+    .then(() => dispatch(requireAuthorization(false)))
     .then(() => dispatch(updateAccount(``)))
 );

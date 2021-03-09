@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
-import {connect} from "react-redux";
-import PropTypes from "prop-types";
+import {useSelector, useDispatch} from "react-redux";
 import {sendComment} from "../../store/api-actions";
 import FormRating from '../form/form-rating/form-rating';
 import FormTextArea from '../form/form-textarea/form-textarea';
 
-const ReviewForm = ({id, onSubmit}) => {
+const ReviewForm = () => {
+
+  const dispatch = useDispatch();
+
+  const {id} = useSelector((state) => state.DATA.currentOffer.data);
 
   const [reviewForm, setReviewForm] = useState({
     rating: ``,
@@ -17,11 +20,11 @@ const ReviewForm = ({id, onSubmit}) => {
 
     const {target: form} = evt;
 
-    onSubmit({
+    dispatch(sendComment({
       id,
       rating: reviewForm.rating,
       comment: reviewForm.review,
-    });
+    }));
 
     form.reset();
   };
@@ -46,22 +49,4 @@ const ReviewForm = ({id, onSubmit}) => {
   );
 };
 
-ReviewForm.propTypes = {
-  id: PropTypes.number,
-  onSubmit: PropTypes.func.isRequired
-};
-
-const mapStateToProps = ({PROPERTY}) => ({
-  id: PROPERTY.data.id,
-});
-
-
-const mapDispatchToProps = (dispatch) => ({
-  onSubmit(commentData) {
-    dispatch(sendComment(commentData));
-  }
-});
-
-
-export {ReviewForm};
-export default connect(mapStateToProps, mapDispatchToProps)(ReviewForm);
+export default ReviewForm;

@@ -1,12 +1,14 @@
 import React from 'react';
-import PropTypes from "prop-types";
-import {connect} from "react-redux";
-import {AuthorizationStatus, logoLinkTypes} from '../../../const';
+import {useSelector} from "react-redux";
+import {logoLinkTypes} from '../../../const';
 import LoginLink from '../../login-link';
 import LogoLink from '../../logo-link';
 import AccountLink from '../../account-link';
 
-const Header = ({isAuth, account}) => {
+const Header = () => {
+
+  const {isAuthorized, account} = useSelector((state) => state.USER);
+
   return (
     <header className="header">
       <div className="container">
@@ -17,7 +19,7 @@ const Header = ({isAuth, account}) => {
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                {isAuth ? <AccountLink account={account} /> : <LoginLink /> }
+                {isAuthorized ? <AccountLink account={account} /> : <LoginLink /> }
               </li>
             </ul>
           </nav>
@@ -27,17 +29,4 @@ const Header = ({isAuth, account}) => {
   );
 };
 
-Header.propTypes = {
-  isAuth: PropTypes.bool.isRequired,
-  account: PropTypes.string,
-};
-
-
-const mapStateToProps = ({USER}) => ({
-  isAuth: USER.authorizationStatus === AuthorizationStatus.AUTH,
-  account: USER.account,
-});
-
-
-export {Header};
-export default connect(mapStateToProps)(Header);
+export default Header;

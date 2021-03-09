@@ -1,12 +1,14 @@
 import React, {useRef, useEffect} from 'react';
-import {connect} from 'react-redux';
+import {useSelector} from 'react-redux';
 import leaflet from 'leaflet';
 import PropTypes from 'prop-types';
 import {mapTypesParams} from '../../const';
 
 import "leaflet/dist/leaflet.css";
 
-const Map = ({place, points, mapType, hoveredOffer}) => {
+const Map = ({place, points, mapType}) => {
+
+  const {hoveredOffer} = useSelector((state) => state.DATA);
 
   const mapRef = useRef();
 
@@ -48,6 +50,7 @@ const Map = ({place, points, mapType, hoveredOffer}) => {
   }, [place]);
 
   useEffect(() => {
+
     const markers = points.map((point) => {
       const currentIconUrl = point.id === hoveredOffer ? mapTypesParams[mapType].iconActiveUrl : mapTypesParams[mapType].iconUrl;
 
@@ -69,11 +72,11 @@ const Map = ({place, points, mapType, hoveredOffer}) => {
     let map = leaflet.layerGroup(markers).addTo(mapRef.current);
 
     return () => map.clearLayers();
-  }, [points, hoveredOffer]);
+  }, [place, points, hoveredOffer]);
 
   return (
     <section className={`${mapTypesParams[mapType].mixClass || ``} map`}>
-      <div id="map" style={{height: `${mapTypesParams[mapType].height}`}} ref={mapRef}></div>
+      <div id="map" style={{height: `${mapTypesParams[mapType].height}`}}></div>
     </section>
   );
 };
@@ -93,12 +96,6 @@ Map.propTypes = {
     }),
   })).isRequired,
   mapType: PropTypes.string.isRequired,
-  hoveredOffer: PropTypes.number
 };
 
-const mapStateToProps = ({PLACES}) => ({
-  hoveredOffer: PLACES.hoveredOffer,
-});
-
-export {Map};
-export default connect(mapStateToProps)(Map);
+export default Map;

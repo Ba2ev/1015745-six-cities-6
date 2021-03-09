@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
-import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
+import {useSelector, useDispatch} from 'react-redux';
 import {updateSort} from '../../store/action';
 import {sortTypes} from '../../const';
 
-const PlaceSort = ({currentSort, onUpdateSort}) => {
+const PlaceSort = () => {
+
+  const dispatch = useDispatch();
+
+  const {currentSort} = useSelector((state) => state.DATA);
 
   const [sortList, setSortList] = useState({
     isOpened: false,
@@ -16,7 +19,7 @@ const PlaceSort = ({currentSort, onUpdateSort}) => {
 
   const handleSortTypeClick = (evt) => {
     const {textContent} = evt.target;
-    onUpdateSort(textContent);
+    dispatch(updateSort(textContent));
     setSortList((prevState) => ({...prevState, isOpened: false}));
   };
 
@@ -38,20 +41,4 @@ const PlaceSort = ({currentSort, onUpdateSort}) => {
   );
 };
 
-PlaceSort.propTypes = {
-  currentSort: PropTypes.string.isRequired,
-  onUpdateSort: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = ({PLACES}) => ({
-  currentSort: PLACES.currentSort
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onUpdateSort(currentSort) {
-    dispatch(updateSort(currentSort));
-  },
-});
-
-export {PlaceSort};
-export default connect(mapStateToProps, mapDispatchToProps)(PlaceSort);
+export default PlaceSort;

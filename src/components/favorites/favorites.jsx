@@ -1,24 +1,18 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {propsOffers} from '../props-validation';
+import {useSelector} from 'react-redux';
 import FavoriteList from '../favorite-list';
 
-const Favorites = ({offers}) => {
+const Favorites = () => {
+
+  const {favorites} = useSelector((state) => state.DATA);
+
   return (
     <section className="favorites">
       <h1 className="favorites__title">Saved listing</h1>
-      <FavoriteList offers={offers}/>
+      <FavoriteList offers={favorites}/>
     </section>
   );
 };
 
-Favorites.propTypes = {
-  offers: propsOffers,
-};
 
-const mapStateToProps = ({PLACES}) => ({
-  offers: PLACES.favorites,
-});
-
-
-export default connect(mapStateToProps)(Favorites);
+export default Favorites;
