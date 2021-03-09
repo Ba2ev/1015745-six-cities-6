@@ -11,7 +11,7 @@ const RoomPage = ({id, isLoaded, onLoadOffer}) => {
 
   useEffect(() => {
     onLoadOffer(id);
-  }, [isLoaded]);
+  }, [id, isLoaded]);
 
   const PropertyWithLoading = withLoadingScreen(Property);
 
@@ -31,9 +31,9 @@ RoomPage.propTypes = {
   onLoadOffer: PropTypes.func,
 };
 
-const mapStateToProps = ({currentOffer}, props) => {
+const mapStateToProps = ({PROPERTY}, props) => {
 
-  const isLoaded = currentOffer.isDataLoaded && currentOffer.isCoomentsLoaded && currentOffer.isNearbyLoaded;
+  const isLoaded = PROPERTY.isInfoLoaded && PROPERTY.isCoomentsLoaded && PROPERTY.isNearbyLoaded;
 
   return {
     id: props.id,

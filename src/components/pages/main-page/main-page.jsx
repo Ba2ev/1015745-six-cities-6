@@ -8,13 +8,13 @@ import Header from '../../layouts/header/header';
 import Locations from '../../locations';
 import CitiesContainer from '../../cities-container';
 
-const MainPage = ({city, offers, isDataLoaded, onLoadData}) => {
+const MainPage = ({city, offers, isOffersLoaded, onLoadData}) => {
 
   useEffect(() => {
-    if (!isDataLoaded) {
+    if (!isOffersLoaded) {
       onLoadData();
     }
-  }, [isDataLoaded]);
+  }, [isOffersLoaded]);
 
   const CitiesWithLoading = withLoadingScreen(CitiesContainer);
   const cityOffers = offers.filter(({city: {name}}) => name === city);
@@ -28,7 +28,7 @@ const MainPage = ({city, offers, isDataLoaded, onLoadData}) => {
         <div className="tabs">
           <Locations />
         </div>
-        <CitiesWithLoading offers={offers} isLoaded={isDataLoaded} />
+        <CitiesWithLoading offers={offers} isLoaded={isOffersLoaded} />
       </main>
     </div>
   );
@@ -37,14 +37,14 @@ const MainPage = ({city, offers, isDataLoaded, onLoadData}) => {
 MainPage.propTypes = {
   city: PropTypes.string.isRequired,
   offers: propsOffers,
-  isDataLoaded: PropTypes.bool.isRequired,
+  isOffersLoaded: PropTypes.bool.isRequired,
   onLoadData: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  city: state.city,
-  offers: state.offers,
-  isDataLoaded: state.isDataLoaded,
+const mapStateToProps = ({PLACES}) => ({
+  city: PLACES.city,
+  offers: PLACES.offers,
+  isOffersLoaded: PLACES.isOffersLoaded,
 });
 
 const mapDispatchToProps = (dispatch) => ({

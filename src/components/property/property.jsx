@@ -2,7 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {propsOffer} from '../props-validation';
-import {markPremiumTypes, mapTypes, ratingTypes, bookmarkBtnTypes} from '../../const';
+import {updateHoveredOfferId, redirectToRoute} from '../../store/action';
+import {toggleToFavorites} from "../../store/api-actions";
+import {markPremiumTypes, mapTypes, ratingTypes, bookmarkBtnTypes, routes, AuthorizationStatus} from '../../const';
 import ImageList from '../image-list';
 import PremiumMark from '../premium-mark';
 import Rating from '../rating/rating';
@@ -14,9 +16,22 @@ import Map from '../map';
 import Reviews from '../reviews';
 import NearPlaces from '../near-places';
 
-const Property = ({data, comments, nearOffers}) => {
+const Property = ({data, comments, nearOffers, onFavoriteClick, onRedirectToRoute, isAuth}) => {
 
-  const {images, isPremium, title, isFavorite, rating, type, bedrooms, maxAdults, price, goods, host, description, location} = data;
+  const {id, images, isPremium, title, isFavorite, rating, type, bedrooms, maxAdults, price, goods, host, description, location} = data;
+
+  const handleFavoriteClick = () => {
+
+    if (isAuth) {
+      onFavoriteClick({
+        id,
+        status: Number(!isFavorite)
+      });
+    } else {
+      onRedirectToRoute(routes.LOGIN);
+    }
+
+  };
 
   return (
     <section className="property">
@@ -30,7 +45,7 @@ const Property = ({data, comments, nearOffers}) => {
             <h1 className="property__name">
               {title}
             </h1>
-            <BookmarkBtn btnType={bookmarkBtnTypes.PROPERTY} isFavorite={isFavorite}/>
+            <BookmarkBtn btnType={bookmarkBtnTypes.PROPERTY} isFavorite={isFavorite} onButtonClick={handleFavoriteClick}/>
           </div>
           <Rating rating={rating} type={ratingTypes.PROPERTY} isValueShowed/>
           <PropertyFeatures type={type} bedrooms={bedrooms} maxAdults={maxAdults}/>
@@ -59,13 +74,29 @@ Property.propTypes = {
   data: propsOffer,
   comments: PropTypes.array,
   nearOffers: PropTypes.array,
+  onFavoriteClick: PropTypes.func,
+  onRedirectToRoute: PropTypes.func,
+  isAuth: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = ({currentOffer}) => ({
-  data: currentOffer.data,
-  comments: currentOffer.comments,
-  nearOffers: currentOffer.nearOffers,
+const mapStateToProps = ({PROPERTY, USER}) => ({
+  data: PROPERTY.data,
+  comments: PROPERTY.comments,
+  nearOffers: PROPERTY.nearOffers,
+  isAuth: USER.authorizationStatus === AuthorizationStatus.AUTH,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onUpdateHoveredId(id) {
+    dispatch(updateHoveredOfferId(id));
+  },
+  onFavoriteClick(favoriteData) {
+    dispatch(toggleToFavorites(favoriteData));
+  },
+  onRedirectToRoute(route) {
+    dispatch(redirectToRoute(route));
+  }
 });
 
 export {Property};
-export default connect(mapStateToProps)(Property);
+export default connect(mapStateToProps, mapDispatchToProps)(Property);

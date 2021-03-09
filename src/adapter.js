@@ -1,4 +1,4 @@
-export const adaptOffersToClient = (offer) => {
+export const adaptOfferToClient = (offer) => {
   const adaptedOffer = {
     ...offer,
     host: {
@@ -22,7 +22,7 @@ export const adaptOffersToClient = (offer) => {
   return adaptedOffer;
 };
 
-export const adaptCommentsToClient = (comment) => {
+export const adaptCommentToClient = (comment) => {
   const adaptedComment = {
     ...comment,
     user: {

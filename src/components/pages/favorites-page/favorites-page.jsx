@@ -14,7 +14,7 @@ const FavoritesPage = ({offers, onLoadOffers, isFavoritesLoaded}) => {
     if (!isFavoritesLoaded) {
       onLoadOffers();
     }
-  }, [isFavoritesLoaded, offers]);
+  }, [isFavoritesLoaded]);
 
   const FavoritesWithLoading = withLoadingScreen(FavoriteContainer);
   const isNoOffers = offers.length === 0;
@@ -40,9 +40,9 @@ FavoritesPage.propTypes = {
   isFavoritesLoaded: PropTypes.bool,
 };
 
-const mapStateToProps = ({favoritesOffers, isFavoritesLoaded}) => ({
-  offers: favoritesOffers,
-  isFavoritesLoaded,
+const mapStateToProps = ({PLACES}) => ({
+  offers: PLACES.favorites,
+  isFavoritesLoaded: PLACES.isFavoritesLoaded,
 });
 
 const mapDispatchToProps = (dispatch) => ({

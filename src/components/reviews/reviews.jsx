@@ -22,13 +22,9 @@ Reviews.propTypes = {
 };
 
 
-const mapStateToProps = (state) => {
-  const isAuth = state.authorizationStatus === AuthorizationStatus.AUTH;
-
-  return {
-    isAuth,
-  };
-};
+const mapStateToProps = ({USER}) => ({
+  isAuth: USER.authorizationStatus === AuthorizationStatus.AUTH,
+});
 
 export {Reviews};
 export default connect(mapStateToProps)(Reviews);
