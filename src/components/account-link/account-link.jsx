@@ -1,14 +1,16 @@
 import React, {Fragment} from 'react';
 import {Link} from 'react-router-dom';
-import {connect} from "react-redux";
+import {useDispatch} from "react-redux";
 import PropTypes from "prop-types";
 import {logout} from "../../store/api-actions";
 
-const AccountLink = ({account, onSpanClick}) => {
+const AccountLink = ({account}) => {
+
+  const dispatch = useDispatch();
 
   const handleSpanClick = (evt) => {
     evt.preventDefault();
-    onSpanClick();
+    dispatch(logout());
   };
 
   return (
@@ -25,15 +27,6 @@ const AccountLink = ({account, onSpanClick}) => {
 
 AccountLink.propTypes = {
   account: PropTypes.string.isRequired,
-  onSpanClick: PropTypes.func.isRequired
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onSpanClick() {
-    dispatch(logout());
-  }
-});
-
-
-export {AccountLink};
-export default connect(null, mapDispatchToProps)(AccountLink);
+export default AccountLink;

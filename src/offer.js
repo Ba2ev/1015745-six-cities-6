@@ -24,6 +24,18 @@ export const updateOffers = (offers, updatedOffer) => {
     ...offers.slice(offerIndex + 1)];
 };
 
+export const updateNearOffers = (offers, updatedOffer) => {
+  const offerIndex = offers.findIndex((offer) => offer.id === updatedOffer.id);
+
+  if (offerIndex === -1) {
+    return offers;
+  }
+
+  return [...offers.slice(0, offerIndex),
+    updatedOffer,
+    ...offers.slice(offerIndex + 1)];
+};
+
 export const sortOffers = (offers, sortType) => {
   switch (sortType) {
     case sortTypes.PRICE_LOW:

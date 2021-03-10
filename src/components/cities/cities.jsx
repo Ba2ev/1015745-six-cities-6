@@ -1,13 +1,21 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
-import {propsOffers} from '../props-validation';
+import {useSelector} from 'react-redux';
 import {locations, mapTypes} from '../../const';
 import {sortOffers} from '../../offer';
 import CitiesPlaces from '../cities-places';
 import Map from '../map';
 
-const Cities = ({city, offers}) => {
+const Cities = () => {
+
+  const {city, offers} = useSelector((state) => {
+    const cityOffers = state.DATA.offers.filter(({city: {name}}) => name === state.DATA.city);
+    const sortedOffers = sortOffers(cityOffers, state.DATA.currentSort);
+    return {
+      city: state.DATA.city,
+      offers: sortedOffers,
+    };
+  });
+
   const cityParams = locations.find(({name}) => name === city).point;
 
   return (
@@ -22,20 +30,4 @@ const Cities = ({city, offers}) => {
   );
 };
 
-Cities.propTypes = {
-  city: PropTypes.string.isRequired,
-  offers: propsOffers,
-};
-
-const mapStateToProps = ({PLACES}) => {
-  const cityOffers = PLACES.offers.filter(({city: {name}}) => name === PLACES.city);
-  const sortedOffers = sortOffers(cityOffers, PLACES.currentSort);
-
-  return {
-    city: PLACES.city,
-    offers: sortedOffers,
-  };
-};
-
-export {Cities};
-export default connect(mapStateToProps)(Cities);
+export default Cities;

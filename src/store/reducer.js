@@ -1,16 +1,13 @@
 import {combineReducers} from 'redux';
 import {user} from './user/user';
-import {property} from './property/property';
-import {places} from './places/places';
+import {data} from './data/data';
 
 export const NameSpace = {
-  PROPERTY: `PROPERTY`,
-  PLACES: `PLACES`,
+  DATA: `DATA`,
   USER: `USER`
 };
 
 export default combineReducers({
-  [NameSpace.PROPERTY]: property,
-  [NameSpace.PLACES]: places,
+  [NameSpace.DATA]: data,
   [NameSpace.USER]: user,
 });

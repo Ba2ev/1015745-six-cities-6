@@ -1,23 +1,25 @@
 import React, {useEffect} from 'react';
-import {connect} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {fetchFavoritesOffer} from "../../../store/api-actions";
-import PropTypes from 'prop-types';
-import {propsOffers} from '../../props-validation';
 import withLoadingScreen from '../../../hocs/withLoadingScreen';
 import Header from '../../layouts/header';
 import Footer from '../../layouts/footer';
 import FavoriteContainer from '../../favorite-container';
 
-const FavoritesPage = ({offers, onLoadOffers, isFavoritesLoaded}) => {
+const FavoritesWithLoading = withLoadingScreen(FavoriteContainer);
+const FavoritesPage = () => {
+
+  const dispatch = useDispatch();
+
+  const {favorites, isFavoritesLoaded} = useSelector((state) => state.DATA);
 
   useEffect(() => {
     if (!isFavoritesLoaded) {
-      onLoadOffers();
+      dispatch(fetchFavoritesOffer());
     }
   }, [isFavoritesLoaded]);
 
-  const FavoritesWithLoading = withLoadingScreen(FavoriteContainer);
-  const isNoOffers = offers.length === 0;
+  const isNoOffers = favorites.length === 0;
 
   return (
     <div className={`page ${isNoOffers ? `page--favorites-empty` : ``}`}>
@@ -25,7 +27,7 @@ const FavoritesPage = ({offers, onLoadOffers, isFavoritesLoaded}) => {
 
       <main className={`page__main page__main--favorites ${isNoOffers ? `page__main--favorites-empty` : ``}`}>
         <div className="page__favorites-container container">
-          <FavoritesWithLoading offers={offers} isLoaded={isFavoritesLoaded}/>
+          <FavoritesWithLoading offers={favorites} isLoaded={isFavoritesLoaded}/>
         </div>
       </main>
 
@@ -34,22 +36,4 @@ const FavoritesPage = ({offers, onLoadOffers, isFavoritesLoaded}) => {
   );
 };
 
-FavoritesPage.propTypes = {
-  offers: propsOffers,
-  onLoadOffers: PropTypes.func.isRequired,
-  isFavoritesLoaded: PropTypes.bool,
-};
-
-const mapStateToProps = ({PLACES}) => ({
-  offers: PLACES.favorites,
-  isFavoritesLoaded: PLACES.isFavoritesLoaded,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onLoadOffers() {
-    dispatch(fetchFavoritesOffer());
-  },
-});
-
-export {FavoritesPage};
-export default connect(mapStateToProps, mapDispatchToProps)(FavoritesPage);
+export default FavoritesPage;

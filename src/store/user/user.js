@@ -1,15 +1,14 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {requireAuthorization, updateAccount} from '../action';
-import {AuthorizationStatus} from '../../const';
 
 const initialState = {
-  authorizationStatus: AuthorizationStatus.NO_AUTH,
+  isAuthorized: false,
   account: ``,
 };
 
 const user = createReducer(initialState, (builder) => {
   builder.addCase(requireAuthorization, (state, action) => {
-    state.authorizationStatus = action.payload;
+    state.isAuthorized = action.payload;
   });
   builder.addCase(updateAccount, (state, action) => {
     state.account = action.payload;
