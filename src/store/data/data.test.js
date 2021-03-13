@@ -1,7 +1,12 @@
+import MockAdapter from 'axios-mock-adapter';
+import {createAPI} from '../../services/api';
 import {data} from './data';
 import {ActionType} from '../action';
-import {locations, sortTypes} from '../../const';
+import {fetchOffers, fetchFavoritesOffer, fetchOfferData, fetchOfferNearby, fetchOfferComments, sendComment, changeFavorite} from '../api-actions';
+import {locations, sortTypes, requests} from '../../const';
 import {updateOffers, changeFavoriteOffers} from '../../offer';
+
+const api = createAPI(() => {});
 
 const offers = [
   {
@@ -31,8 +36,8 @@ const offers = [
       `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/12.jpg`
     ],
     "title": `The house among olive `,
-    "isFavorite": false,
-    "isPremium": true,
+    "is_favorite": true,
+    "is_premium": true,
     "rating": 3,
     "type": `room`,
     "bedrooms": 1,
@@ -47,8 +52,8 @@ const offers = [
     "host": {
       "id": 25,
       "name": `Angelina`,
-      "isPro": true,
-      "avatarUrl": `img/avatar-angelina.jpg`
+      "is_pro": true,
+      "avatar_url": `img/avatar-angelina.jpg`
     },
     "description": `Relax, rejuvenate and unplug in this ultimate rustic getaway experience in the country. In our beautiful screened Pondhouse, you can gaze at the stars and listen to the sounds of nature from your cozy warm bed.`,
     "location": {
@@ -85,8 +90,8 @@ const offers = [
       `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/2.jpg`
     ],
     "title": `Waterfront with extraordinary view`,
-    "isFavorite": true,
-    "isPremium": false,
+    "is_favorite": false,
+    "is_premium": false,
     "rating": 4.8,
     "type": `apartment`,
     "bedrooms": 5,
@@ -106,8 +111,8 @@ const offers = [
     "host": {
       "id": 25,
       "name": `Angelina`,
-      "isPro": true,
-      "avatarUrl": `img/avatar-angelina.jpg`
+      "is_pro": true,
+      "avatar_url": `img/avatar-angelina.jpg`
     },
     "description": `Relax, rejuvenate and unplug in this ultimate rustic getaway experience in the country. In our beautiful screened Pondhouse, you can gaze at the stars and listen to the sounds of nature from your cozy warm bed.`,
     "location": {
@@ -144,12 +149,182 @@ const offers = [
       `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/6.jpg`
     ],
     "title": `Penthouse, 4-5 rooms + 5 balconies`,
-    "isFavorite": false,
-    "isPremium": true,
+    "is_favorite": true,
+    "is_premium": true,
     "rating": 4.2,
     "type": `hotel`,
     "bedrooms": 4,
     "max_adults": 6,
+    "price": 182,
+    "goods": [
+      `Laptop friendly workspace`,
+      `Washer`,
+      `Breakfast`,
+      `Air conditioning`
+    ],
+    "host": {
+      "id": 25,
+      "name": `Angelina`,
+      "is_pro": true,
+      "avatar_url": `img/avatar-angelina.jpg`
+    },
+    "description": `This is a place for dreamers to reset, reflect, and create. Designed with a 'slow' pace in mind, our hope is that you enjoy every part of your stay; from making local coffee by drip in the morning, choosing the perfect record to put on as the sun sets.`,
+    "location": {
+      "latitude": 50.950361,
+      "longitude": 6.961974,
+      "zoom": 16
+    },
+    "id": 3
+  },
+];
+
+const adaptedOffers = [
+  {
+    "city": {
+      "name": `Paris`,
+      "location": {
+        "latitude": 48.85661,
+        "longitude": 2.351499,
+        "zoom": 13
+      }
+    },
+    "previewImage": `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/16.jpg`,
+    "images": [
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/7.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/8.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/5.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/9.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/19.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/18.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/10.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/4.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/20.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/6.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/13.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/11.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/2.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/12.jpg`
+    ],
+    "title": `The house among olive `,
+    "isFavorite": true,
+    "isPremium": true,
+    "rating": 3,
+    "type": `room`,
+    "bedrooms": 1,
+    "maxAdults": 1,
+    "price": 169,
+    "goods": [
+      `Breakfast`,
+      `Air conditioning`,
+      `Laptop friendly workspace`,
+      `Washer`
+    ],
+    "host": {
+      "id": 25,
+      "name": `Angelina`,
+      "isPro": true,
+      "avatarUrl": `img/avatar-angelina.jpg`
+    },
+    "description": `Relax, rejuvenate and unplug in this ultimate rustic getaway experience in the country. In our beautiful screened Pondhouse, you can gaze at the stars and listen to the sounds of nature from your cozy warm bed.`,
+    "location": {
+      "latitude": 48.83861,
+      "longitude": 2.350499,
+      "zoom": 16
+    },
+    "id": 1
+  },
+  {
+    "city": {
+      "name": `Brussels`,
+      "location": {
+        "latitude": 50.846557,
+        "longitude": 4.351697,
+        "zoom": 13
+      }
+    },
+    "previewImage": `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/18.jpg`,
+    "images": [
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/8.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/20.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/16.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/9.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/10.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/12.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/15.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/19.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/4.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/13.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/18.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/14.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/7.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/2.jpg`
+    ],
+    "title": `Waterfront with extraordinary view`,
+    "isFavorite": false,
+    "isPremium": false,
+    "rating": 4.8,
+    "type": `apartment`,
+    "bedrooms": 5,
+    "maxAdults": 6,
+    "price": 310,
+    "goods": [
+      `Dishwasher`,
+      `Towels`,
+      `Washer`,
+      `Breakfast`,
+      `Baby seat`,
+      `Air conditioning`,
+      `Fridge`,
+      `Laptop friendly workspace`,
+      `Coffee machine`
+    ],
+    "host": {
+      "id": 25,
+      "name": `Angelina`,
+      "isPro": true,
+      "avatarUrl": `img/avatar-angelina.jpg`
+    },
+    "description": `Relax, rejuvenate and unplug in this ultimate rustic getaway experience in the country. In our beautiful screened Pondhouse, you can gaze at the stars and listen to the sounds of nature from your cozy warm bed.`,
+    "location": {
+      "latitude": 50.844556999999995,
+      "longitude": 4.346697,
+      "zoom": 16
+    },
+    "id": 2
+  },
+  {
+    "city": {
+      "name": `Cologne`,
+      "location": {
+        "latitude": 50.938361,
+        "longitude": 6.959974,
+        "zoom": 13
+      }
+    },
+    "previewImage": `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/14.jpg`,
+    "images": [
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/18.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/20.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/2.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/17.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/13.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/5.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/8.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/15.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/10.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/11.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/4.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/3.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/7.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/6.jpg`
+    ],
+    "title": `Penthouse, 4-5 rooms + 5 balconies`,
+    "isFavorite": true,
+    "isPremium": true,
+    "rating": 4.2,
+    "type": `hotel`,
+    "bedrooms": 4,
+    "maxAdults": 6,
     "price": 182,
     "goods": [
       `Laptop friendly workspace`,
@@ -171,114 +346,9 @@ const offers = [
     },
     "id": 3
   },
-  {
-    "city": {
-      "name": `Brussels`,
-      "location": {
-        "latitude": 50.846557,
-        "longitude": 4.351697,
-        "zoom": 13
-      }
-    },
-    "preview_image": `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/13.jpg`,
-    "images": [
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/20.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/11.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/3.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/1.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/16.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/10.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/15.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/8.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/5.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/12.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/19.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/4.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/9.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/6.jpg`
-    ],
-    "title": `The house among olive `,
-    "isFavorite": true,
-    "isPremium": false,
-    "rating": 5,
-    "type": `room`,
-    "bedrooms": 1,
-    "max_adults": 1,
-    "price": 115,
-    "goods": [
-      `Washer`,
-      `Laptop friendly workspace`,
-      `Breakfast`
-    ],
-    "host": {
-      "id": 25,
-      "name": `Angelina`,
-      "isPro": true,
-      "avatarUrl": `img/avatar-angelina.jpg`
-    },
-    "description": `Design interior in most sympathetic area! Complitely renovated, well-equipped, cosy studio in idyllic, over 100 years old wooden house. Calm street, fast connection to center and airport.`,
-    "location": {
-      "latitude": 50.849557,
-      "longitude": 4.374696999999999,
-      "zoom": 16
-    },
-    "id": 4
-  },
-  {
-    "city": {
-      "name": `Amsterdam`,
-      "location": {
-        "latitude": 52.37454,
-        "longitude": 4.897976,
-        "zoom": 13
-      }
-    },
-    "preview_image": `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/10.jpg`,
-    "images": [
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/5.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/20.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/9.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/2.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/13.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/8.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/17.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/10.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/15.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/12.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/18.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/3.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/11.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/1.jpg`
-    ],
-    "title": `The Joshua Tree House`,
-    "isFavorite": false,
-    "isPremium": false,
-    "rating": 3.3,
-    "type": `hotel`,
-    "bedrooms": 4,
-    "max_adults": 5,
-    "price": 457,
-    "goods": [
-      `Laptop friendly workspace`,
-      `Washer`,
-      `Breakfast`
-    ],
-    "host": {
-      "id": 25,
-      "name": `Angelina`,
-      "isPro": true,
-      "avatarUrl": `img/avatar-angelina.jpg`
-    },
-    "description": `This is a place for dreamers to reset, reflect, and create. Designed with a 'slow' pace in mind, our hope is that you enjoy every part of your stay; from making local coffee by drip in the morning, choosing the perfect record to put on as the sun sets.`,
-    "location": {
-      "latitude": 52.36354,
-      "longitude": 4.889976,
-      "zoom": 16
-    },
-    "id": 5
-  }];
+];
 
-const favorites = offers.filter((offer) => offer.isFavorite);
+const favorites = adaptedOffers.filter((offer) => offer.is_favorite);
 
 const propertyData = {
   "city": {
@@ -762,5 +832,128 @@ describe(`Data reducer works correctly`, () => {
     };
 
     expect(data(state, updateSortAction)).toEqual({currentSort: sortTypes.RATING});
+  });
+});
+
+describe(`Async operations work correctly`, () => {
+  it(`Should make a correct API call to /hotels`, () => {
+    const mockApi = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const offersLoader = fetchOffers();
+
+    mockApi.onGet(requests.HOTELS).reply(200, offers);
+
+    return offersLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_PLACES,
+          payload: expect.any(Array),
+        });
+      });
+  });
+
+  it(`Should make a correct API call to /favorites`, () => {
+    const mockApi = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const favoritesLoader = fetchFavoritesOffer();
+
+    mockApi.onGet(requests.FAVORITES).reply(200, favorites);
+
+    return favoritesLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_FAVORITES_OFFERS,
+          payload: expect.any(Array),
+        });
+      });
+  });
+
+  it(`Should make a correct API call to /hotels/:id`, () => {
+    const mockApi = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const propertyDataLoader = fetchOfferData(1);
+
+    mockApi.onGet(`${requests.HOTELS}/1`).reply(200, propertyData);
+
+    return propertyDataLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_PROPERTY_DATA,
+          payload: expect.any(Object),
+        });
+      });
+  });
+
+  it(`Should make a correct API call to /hotels/:id/nearby`, () => {
+    const mockApi = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const propertyNearblyLoader = fetchOfferNearby(1);
+
+    mockApi.onGet(`${requests.HOTELS}/1/nearby`).reply(200, propertyNearblyOffers);
+
+    return propertyNearblyLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_PROPERTY_NEARBY,
+          payload: expect.any(Array),
+        });
+      });
+  });
+
+  it(`Should make a correct API call to /comments/:id`, () => {
+    const mockApi = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const propertyCommentsLoader = fetchOfferComments(1);
+
+    mockApi.onGet(`${requests.COMMENTS}/1`).reply(200, propertyComments);
+
+    return propertyCommentsLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_PROPERTY_COMMENTS,
+          payload: expect.any(Array),
+        });
+      });
+  });
+
+  it(`Should make a correct API call to /comments/:id by adding new comment`, () => {
+    const mockApi = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const fakeComment = {id: 1, comment: `fake text`, rating: `5`};
+    const sendCommentLoader = sendComment(fakeComment);
+
+    mockApi.onPost(`${requests.COMMENTS}/1`).reply(200, propertyComments);
+
+    return sendCommentLoader(dispatch, () => {}, api)
+      .then(()=> {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_PROPERTY_COMMENTS,
+          payload: expect.any(Array),
+        });
+      });
+  });
+
+  it(`Should make a correct API call to /favorite/:id/:status by toggle offer as favorite`, () => {
+    const mockApi = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const fakeOffer = {id: 1, status: 0};
+    const changeFavoriteLoader = changeFavorite(fakeOffer);
+
+    mockApi.onPost(`${requests.FAVORITE}/1/0`).reply(200, propertyData);
+
+    return changeFavoriteLoader(dispatch, () => {}, api)
+      .then(()=> {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.UPDATE_OFFER_FAVORITE,
+          payload: expect.any(Object),
+        });
+      });
   });
 });
