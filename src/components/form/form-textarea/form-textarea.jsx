@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const FormTextArea = ({handler}) => {
   return (
-    <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" onChange={handler}></textarea>
+    <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" onChange={handler} data-testid="textarea"></textarea>
   );
 };
 

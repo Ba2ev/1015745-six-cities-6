@@ -25,5 +25,4 @@ FormRating.propTypes = {
   handler: PropTypes.func.isRequired,
 };
 
-
 export default FormRating;
