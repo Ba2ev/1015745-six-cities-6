@@ -1,6 +1,5 @@
 import React from 'react';
-import {Router as BrowserRouter, Switch, Route} from 'react-router-dom';
-import browserHistory from "../../browser-history";
+import {Switch, Route} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import {routes} from '../../const';
 import withPrivateRoute from '../../hocs/withPrivateRoute/';
@@ -18,26 +17,24 @@ const App = () => {
   const LoginPrivateRoute = withPrivateRoute(LoginPage, !isAuthorized, routes.MAIN);
 
   return (
-    <BrowserRouter history={browserHistory}>
-      <Switch>
-        <Route exact path={routes.MAIN}>
-          <MainPage/>
-        </Route>
-        <Route exact path={routes.LOGIN}>
-          <LoginPrivateRoute />
-        </Route>
-        <Route exact path={routes.FAVORITES}>
-          <FavoritesPrivateRoute />
-        </Route>
-        <Route exact
-          path={routes.OFFER}
-          render= { ({match}) => <RoomPage id={match.params.id}/> }>
-        </Route>
-        <Route>
-          <NotFoundPage />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <Switch>
+      <Route exact path={routes.MAIN}>
+        <MainPage/>
+      </Route>
+      <Route exact path={routes.LOGIN}>
+        <LoginPrivateRoute />
+      </Route>
+      <Route exact path={routes.FAVORITES}>
+        <FavoritesPrivateRoute />
+      </Route>
+      <Route exact
+        path={routes.OFFER}
+        render= { ({match}) => <RoomPage id={match.params.id}/> }>
+      </Route>
+      <Route>
+        <NotFoundPage />
+      </Route>
+    </Switch>
   );
 };
 

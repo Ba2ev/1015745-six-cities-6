@@ -1,7 +1,7 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {updateCity, updateHoveredOfferId, loadOffers, loadFavoritesOffer, updateOfferFavorite, updateSort, loadOfferData, loadOfferComments, loadOfferNearby} from '../action';
 import {locations, sortTypes} from '../../const';
-import {updateOffers, changeFavoriteOffers, updateNearOffers} from '../../offer';
+import {updateOffers, changeFavoriteOffers} from '../../offer';
 
 const initialState = {
   city: locations[0].name,
@@ -40,7 +40,7 @@ const data = createReducer(initialState, (builder) => {
     state.favorites = changeFavoriteOffers(state.favorites, action.payload);
     state.offers = updateOffers(state.offers, action.payload);
     state.currentOffer.data = action.payload;
-    state.currentOffer.nearOffers = updateNearOffers(state.currentOffer.nearOffers, action.payload);
+    state.currentOffer.nearOffers = updateOffers(state.currentOffer.nearOffers, action.payload);
   });
   builder.addCase(updateSort, (state, action) => {
     state.currentSort = action.payload;

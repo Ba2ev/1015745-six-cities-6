@@ -56,6 +56,14 @@ export const routes = {
   OFFER: `/offer/:id`,
 };
 
+export const requests = {
+  LOGIN: `/login`,
+  LOGOUT: `/logout`,
+  HOTELS: `/hotels`,
+  FAVORITE: `/favorite`,
+  COMMENTS: `/comments`
+};
+
 export const sortTypes = {
   POPULAR: `Popular`,
   PRICE_LOW: `Price: low to high`,

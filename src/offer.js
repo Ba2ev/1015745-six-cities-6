@@ -1,15 +1,15 @@
 import {sortTypes} from './const';
 
-const sortOfferPriceLow = (eventA, eventB) => {
-  return eventA.price - eventB.price;
+const sortOfferPriceLow = (offerA, offerB) => {
+  return offerA.price - offerB.price;
 };
 
-const sortOfferPriceHigh = (eventA, eventB) => {
-  return eventB.price - eventA.price;
+const sortOfferPriceHigh = (offerA, offerB) => {
+  return offerB.price - offerA.price;
 };
 
-const sortOfferRating = (eventA, eventB) => {
-  return eventB.rating - eventA.rating;
+const sortOfferRating = (offerA, offerB) => {
+  return offerB.rating - offerA.rating;
 };
 
 const deleteOffer = (offers, deletedOffer) => {
@@ -17,14 +17,6 @@ const deleteOffer = (offers, deletedOffer) => {
 };
 
 export const updateOffers = (offers, updatedOffer) => {
-  const offerIndex = offers.findIndex((offer) => offer.id === updatedOffer.id);
-
-  return [...offers.slice(0, offerIndex),
-    updatedOffer,
-    ...offers.slice(offerIndex + 1)];
-};
-
-export const updateNearOffers = (offers, updatedOffer) => {
   const offerIndex = offers.findIndex((offer) => offer.id === updatedOffer.id);
 
   if (offerIndex === -1) {
@@ -50,5 +42,5 @@ export const sortOffers = (offers, sortType) => {
 };
 
 export const changeFavoriteOffers = (offers, updatedOffer) => {
-  return updatedOffer.isFavorite ? [updatedOffer, ...offers] : deleteOffer(offers, updatedOffer);
+  return updatedOffer.isFavorite ? [...offers, updatedOffer] : deleteOffer(offers, updatedOffer);
 };
