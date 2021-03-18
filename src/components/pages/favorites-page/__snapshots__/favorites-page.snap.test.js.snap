@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should FavoritesPage render correctly without authorization 1`] = `
+exports[`Should FavoritesPage render correctly with empty favorites 1`] = `
 <div>
   <div
     class="page page--favorites-empty"
