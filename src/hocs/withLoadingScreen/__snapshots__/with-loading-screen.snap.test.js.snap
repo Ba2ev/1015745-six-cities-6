@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should HOC withLoadingScreen render correctly should HOC withLoadingScreen render correctly after loaded data 1`] = `
+<div>
+  <h1>
+    Intro Component
+  </h1>
+</div>
+`;
+
+exports[`should HOC withLoadingScreen render correctly should HOC withLoadingScreen render correctly with loading data 1`] = `
+<div>
+  <p>
+    Loading ...
+  </p>
+</div>
+`;
