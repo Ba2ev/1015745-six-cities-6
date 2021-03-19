@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LogoLink should render correctly 1`] = `
+<div>
+  <a
+    class="header__logo-link"
+    href="/"
+  >
+    <img
+      alt="6 cities logo"
+      class="header__logo"
+      height="81"
+      src="img/logo.svg"
+      width="81"
+    />
+  </a>
+</div>
+`;

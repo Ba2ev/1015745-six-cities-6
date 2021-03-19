@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`User render correctly User should render pro user correctly with property type 1`] = `
+<div>
+  <div
+    class="property__host-user user"
+  >
+    <div
+      class="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper"
+    >
+      <img
+        alt="Host avatar"
+        class="property__avatar user__avatar"
+        height="74"
+        src="https://assets.htmlacademy.ru/intensives/javascript-3/avatar/9.jpg"
+        width="74"
+      />
+    </div>
+    <span
+      class="property__user-name"
+    >
+      Sophie
+    </span>
+    <span
+      class="property__user-status"
+    >
+      Pro
+    </span>
+  </div>
+</div>
+`;
+
+exports[`User render correctly User should render simple user correctly with property type 1`] = `
+<div>
+  <div
+    class="property__host-user user"
+  >
+    <div
+      class="property__avatar-wrapper  user__avatar-wrapper"
+    >
+      <img
+        alt="Host avatar"
+        class="property__avatar user__avatar"
+        height="74"
+        src="https://assets.htmlacademy.ru/intensives/javascript-3/avatar/6.jpg"
+        width="74"
+      />
+    </div>
+    <span
+      class="property__user-name"
+    >
+      Kendall
+    </span>
+  </div>
+</div>
+`;
+
+exports[`User render correctly User should render simple user correctly with review type 1`] = `
+<div>
+  <div
+    class="reviews__user user"
+  >
+    <div
+      class="reviews__avatar-wrapper  user__avatar-wrapper"
+    >
+      <img
+        alt="Reviews avatar"
+        class="reviews__avatar user__avatar"
+        height="54"
+        src="https://assets.htmlacademy.ru/intensives/javascript-3/avatar/6.jpg"
+        width="54"
+      />
+    </div>
+    <span
+      class="reviews__user-name"
+    >
+      Kendall
+    </span>
+  </div>
+</div>
+`;

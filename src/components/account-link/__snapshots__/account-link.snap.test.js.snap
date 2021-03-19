@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccountLink should render correctly 1`] = `
+<div>
+  <a
+    class="header__nav-link header__nav-link--profile"
+    href="/favorites"
+  >
+    <div
+      class="header__avatar-wrapper user__avatar-wrapper"
+    />
+    <span
+      class="header__user-name user__name"
+    >
+      test@test.ru
+    </span>
+  </a>
+  <a>
+    Sign out
+  </a>
+</div>
+`;
