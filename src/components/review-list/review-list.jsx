@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReviewItem from '../review-item/review-item';
 
-const ReviewList = ({reviews}) => {
+const ReviewList = ({reviews, limit = 0}) => {
   return (
     <ul className="reviews__list">
-      {reviews.map((review) => (
+      {reviews.slice(0, limit).map((review) => (
         <ReviewItem key={review.id} review={review}/>
       ))}
     </ul>
@@ -14,6 +14,7 @@ const ReviewList = ({reviews}) => {
 
 ReviewList.propTypes = {
   reviews: PropTypes.arrayOf(PropTypes.object),
+  limit: PropTypes.number
 };
 
 export default ReviewList;

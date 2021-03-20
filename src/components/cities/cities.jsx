@@ -1,5 +1,6 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
+import {createSelector} from 'reselect';
 import {locations, mapTypes} from '../../const';
 import {sortOffers} from '../../offer';
 import CitiesPlaces from '../cities-places';
@@ -7,14 +8,20 @@ import Map from '../map';
 
 const Cities = () => {
 
-  const {city, offers} = useSelector((state) => {
-    const cityOffers = state.DATA.offers.filter(({city: {name}}) => name === state.DATA.city);
-    const sortedOffers = sortOffers(cityOffers, state.DATA.currentSort);
-    return {
-      city: state.DATA.city,
-      offers: sortedOffers,
-    };
-  });
+  const offersSelector = (state) => state.DATA.offers;
+  const citySelector = (state) => state.DATA.city;
+  const sortSelector = (state) => state.DATA.currentSort;
+
+  const sortedOffersSelector = createSelector(
+      [offersSelector, citySelector, sortSelector],
+      (offers, city, currentSort) => {
+        const cityOffers = offers.filter(({city: {name}}) => name === city);
+        return sortOffers(cityOffers, currentSort);
+      }
+  );
+
+  const {city} = useSelector((state) => state.DATA);
+  const {offers} = useSelector((state) => ({offers: sortedOffersSelector(state)}));
 
   const cityParams = locations.find(({name}) => name === city).point;
 

@@ -8,7 +8,7 @@ const FormRating = ({handler}) => {
       {
         ratingStarsParams.map(({value, title}) => (
           <Fragment key = {value}>
-            <input className="form__rating-input visually-hidden" name="rating" value={`${value}`} id={`${value}-stars`} type="radio" onClick={handler}/>
+            <input className="form__rating-input visually-hidden" name="rating" value={`${value}`} id={`${value}-stars`} type="radio" required onClick={handler}/>
             <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title={title}>
               <svg className="form__star-image" width="37" height="33">
                 <use xlinkHref="#icon-star"></use>

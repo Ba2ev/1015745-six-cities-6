@@ -343,7 +343,7 @@ exports[`RoomPage should render correctly 1`] = `
                       class="reviews__time"
                       datetime="2021-03-07"
                     >
-                      2021-03
+                      March 2021
                     </time>
                   </div>
                 </li>
@@ -398,7 +398,7 @@ exports[`RoomPage should render correctly 1`] = `
                       class="reviews__time"
                       datetime="2021-03-07"
                     >
-                      2021-03
+                      March 2021
                     </time>
                   </div>
                 </li>

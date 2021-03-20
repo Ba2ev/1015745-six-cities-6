@@ -5,5 +5,5 @@ export const getDateTimeFormat = (date) => {
 };
 
 export const getLocalizedDate = (date) => {
-  return dayjs(date).format(`YYYY-MM`);
+  return dayjs(date).format(`MMMM YYYY`);
 };

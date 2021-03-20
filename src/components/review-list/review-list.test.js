@@ -30,7 +30,7 @@ const reviews = [
 ];
 
 it(`ReviewList should render correctly`, () => {
-  const {queryByText} = render(<ReviewList reviews={reviews}/>);
+  const {queryByText} = render(<ReviewList reviews={reviews} limit={10}/>);
 
   const firstReviewUserName = queryByText(reviews[0].user.name);
   const secondReviewUserName = queryByText(reviews[1].user.name);

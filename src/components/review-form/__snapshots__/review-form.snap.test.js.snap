@@ -20,6 +20,7 @@ exports[`ReviewForm should render correctly 1`] = `
         class="form__rating-input visually-hidden"
         id="5-stars"
         name="rating"
+        required=""
         type="radio"
         value="5"
       />
@@ -42,6 +43,7 @@ exports[`ReviewForm should render correctly 1`] = `
         class="form__rating-input visually-hidden"
         id="4-stars"
         name="rating"
+        required=""
         type="radio"
         value="4"
       />
@@ -64,6 +66,7 @@ exports[`ReviewForm should render correctly 1`] = `
         class="form__rating-input visually-hidden"
         id="3-stars"
         name="rating"
+        required=""
         type="radio"
         value="3"
       />
@@ -86,6 +89,7 @@ exports[`ReviewForm should render correctly 1`] = `
         class="form__rating-input visually-hidden"
         id="2-stars"
         name="rating"
+        required=""
         type="radio"
         value="2"
       />
@@ -108,6 +112,7 @@ exports[`ReviewForm should render correctly 1`] = `
         class="form__rating-input visually-hidden"
         id="1-stars"
         name="rating"
+        required=""
         type="radio"
         value="1"
       />
@@ -131,6 +136,8 @@ exports[`ReviewForm should render correctly 1`] = `
       class="reviews__textarea form__textarea"
       data-testid="textarea"
       id="review"
+      maxlength="300"
+      minlength="50"
       name="review"
       placeholder="Tell how was your stay, what you like and what can be improved"
     />
@@ -156,6 +163,7 @@ exports[`ReviewForm should render correctly 1`] = `
       </p>
       <button
         class="reviews__submit form__submit button"
+        disabled=""
         type="submit"
       >
         Submit

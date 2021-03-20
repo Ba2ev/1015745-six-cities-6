@@ -257,3 +257,8 @@ export const logoLinkTypesParams = {
     IMAGE_HEIGHT: 33,
   },
 };
+
+export const formTextAreaParams = {
+  MIN_LENTGH: 50,
+  MAX_LENTGH: 300,
+};

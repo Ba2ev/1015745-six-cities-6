@@ -1,5 +1,6 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
+import {createSelector} from 'reselect';
 import PropTypes from 'prop-types';
 import {propsOffer} from '../props-validation';
 import {markPremiumTypes, mapTypes, ratingTypes, bookmarkBtnTypes} from '../../const';
@@ -16,7 +17,16 @@ import NearPlaces from '../near-places';
 
 const Property = () => {
 
-  const {data, comments, nearOffers} = useSelector((state) => state.DATA.currentOffer);
+  const commentsSelector = (state) => state.DATA.currentOffer.comments;
+
+  const sortedCommentsSelector = createSelector(
+      commentsSelector,
+      (comments) => comments.slice().sort((commentA, commentB) => commentB.date - commentA.date)
+  );
+
+  const {data, nearOffers} = useSelector((state) => state.DATA.currentOffer);
+
+  const {comments} = useSelector((state) => ({comments: sortedCommentsSelector(state)}));
 
   const {id, images, isPremium, title, isFavorite, rating, type, bedrooms, maxAdults, price, goods, host, description, location} = data;
 

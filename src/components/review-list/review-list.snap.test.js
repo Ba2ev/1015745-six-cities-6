@@ -30,7 +30,7 @@ const reviews = [
 ];
 
 it(`ReviewList should render correctly`, () => {
-  const {container} = render(<ReviewList reviews={reviews}/>);
+  const {container} = render(<ReviewList reviews={reviews} limit={10}/>);
 
   expect(container).toMatchSnapshot();
 });

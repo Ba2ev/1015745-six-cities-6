@@ -16,6 +16,10 @@ const deleteOffer = (offers, deletedOffer) => {
   return offers.filter((offer) => offer.id !== deletedOffer.id);
 };
 
+export const updateCurrentOffer = (stateOffer, payloadOffer) => {
+  return stateOffer.id === payloadOffer.id ? payloadOffer : stateOffer;
+};
+
 export const updateOffers = (offers, updatedOffer) => {
   const offerIndex = offers.findIndex((offer) => offer.id === updatedOffer.id);
 
