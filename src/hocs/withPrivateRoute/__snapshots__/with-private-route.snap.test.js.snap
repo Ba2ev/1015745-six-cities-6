@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should HOC withPrivateRoute render correctly should HOC withPrivateRoute render correctly with authorisation 1`] = `
+<div>
+  <h1>
+    Intro Component
+  </h1>
+</div>
+`;
+
+exports[`should HOC withPrivateRoute render correctly should HOC withPrivateRoute render correctly without authorisation 1`] = `
+<div>
+  <h1>
+    Login Component
+  </h1>
+</div>
+`;

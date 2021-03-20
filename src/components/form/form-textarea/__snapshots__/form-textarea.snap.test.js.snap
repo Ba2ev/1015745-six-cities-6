@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextArea should render correctly 1`] = `
+<div>
+  <textarea
+    class="reviews__textarea form__textarea"
+    data-testid="textarea"
+    id="review"
+    name="review"
+    placeholder="Tell how was your stay, what you like and what can be improved"
+  />
+</div>
+`;

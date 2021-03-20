@@ -1,2 +1,2 @@
-import withLoadingScreen from './withLoadingScreen';
+import withLoadingScreen from './with-loading-screen';
 export default withLoadingScreen;
