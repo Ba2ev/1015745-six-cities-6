@@ -34,3 +34,24 @@ it(`Header should render correctly`, () => {
 
   expect(email).toBeInTheDocument();
 });
+
+it(`Header should render snapshot correctly`, () => {
+  const history = createMemoryHistory();
+
+  const initialState = {
+    [NameSpace.USER]: {
+      isAuthorized: true,
+      account: FAKE_EMAIL
+    }
+  };
+
+  const {container} = render(
+      <redux.Provider store={mockStore(initialState)}>
+        <Router history={history}>
+          <Header />
+        </Router>
+      </redux.Provider>
+  );
+
+  expect(container).toMatchSnapshot();
+});

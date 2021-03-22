@@ -204,3 +204,23 @@ it(`PlaceList should render correctly`, () => {
 
   expect(priceLabels).toHaveLength(offers.length);
 });
+
+it(`PlaceList should render snapshot correctly`, () => {
+  const history = createMemoryHistory();
+
+  const initialState = {
+    [NameSpace.USER]: {
+      isAuthorized: true,
+    }
+  };
+
+  const {container} = render(
+      <redux.Provider store={mockStore(initialState)}>
+        <Router history={history}>
+          <PlaceList offers={offers} listType={cardListTypes.CITIES}/>
+        </Router>
+      </redux.Provider>
+  );
+
+  expect(container).toMatchSnapshot();
+});

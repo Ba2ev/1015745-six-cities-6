@@ -1,7 +1,7 @@
 import React from 'react';
 import {render} from '@testing-library/react';
 import ReviewItem from './review-item';
-import {getLocalizedDate} from '../../util';
+import {getLocalizedDate} from '../../util/util';
 
 const review = {
   "id": 1,
@@ -26,4 +26,11 @@ it(`ReviewItem should render correctly`, () => {
   expect(textTime).toBeInTheDocument();
   expect(textName).toBeInTheDocument();
   expect(textRatingValue).not.toBeInTheDocument();
+});
+
+
+it(`ReviewItem should render snapshot correctly`, () => {
+  const {container} = render(<ReviewItem review={review}/>);
+
+  expect(container).toMatchSnapshot();
 });

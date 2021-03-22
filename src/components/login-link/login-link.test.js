@@ -17,3 +17,15 @@ it(`LoginLink should render correctly`, () => {
 
   expect(image).toBeInTheDocument();
 });
+
+it(`LoginLink should render snapshot correctly`, () => {
+  const history = createMemoryHistory();
+
+  const {container} = render(
+      <Router history={history}>
+        <LoginLink />
+      </Router>
+  );
+
+  expect(container).toMatchSnapshot();
+});

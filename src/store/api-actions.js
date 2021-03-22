@@ -1,5 +1,5 @@
 import {loadOffers, loadOfferData, loadOfferComments, loadOfferNearby, loadFavoritesOffer, updateOfferFavorite, requireAuthorization, updateAccount} from './action';
-import {adaptOfferToClient, adaptCommentToClient} from '../adapter';
+import {adaptOfferToClient, adaptCommentToClient} from '../adapter/adapter';
 
 export const fetchOffers = () => (dispatch, _getState, api) => (
   api.get(`/hotels`)

@@ -59,3 +59,26 @@ it(`Reviews should render correctly`, () => {
 
   expect(headerText).toBeInTheDocument();
 });
+
+it(`Reviews should render snapshot correctly`, () => {
+  const initialState = {
+    [NameSpace.USER]: {
+      isAuthorized: true
+    },
+    [NameSpace.DATA]: {
+      currentOffer: {
+        data: {
+          id: 1,
+        }
+      }
+    }
+  };
+
+  const {container} = render(
+      <redux.Provider store={mockStore(initialState)}>
+        <Reviews reviews={reviews}/>
+      </redux.Provider>
+  );
+
+  expect(container).toMatchSnapshot();
+});

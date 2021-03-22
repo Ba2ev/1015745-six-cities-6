@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Rating should render snapshots correctly Rating should render snapshot correctly by card type 1`] = `
+<div>
+  <div
+    class="place-card__rating rating"
+  >
+    <div
+      class="place-card__stars rating__stars"
+    >
+      <span
+        style="width: 80%;"
+      />
+      <span
+        class="visually-hidden"
+      >
+        Rating
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Rating should render snapshots correctly Rating should render snapshot correctly by property type 1`] = `
+<div>
+  <div
+    class="property__rating rating"
+  >
+    <div
+      class="property__stars rating__stars"
+    >
+      <span
+        style="width: 80%;"
+      />
+      <span
+        class="visually-hidden"
+      >
+        Rating
+      </span>
+    </div>
+    <span
+      class="property__rating-value rating__value"
+    >
+      4
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Rating should render snapshots correctly Rating should render snapshot correctly by review type 1`] = `
+<div>
+  <div
+    class="reviews__rating rating"
+  >
+    <div
+      class="reviews__stars rating__stars"
+    >
+      <span
+        style="width: 80%;"
+      />
+      <span
+        class="visually-hidden"
+      >
+        Rating
+      </span>
+    </div>
+  </div>
+</div>
+`;

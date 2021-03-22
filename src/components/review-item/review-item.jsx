@@ -1,5 +1,5 @@
 import React from 'react';
-import {getDateTimeFormat, getLocalizedDate} from '../../util';
+import {getDateTimeFormat, getLocalizedDate} from '../../util/util';
 import {ratingTypes, userTypes} from '../../const';
 import User from '../user';
 import Rating from '../rating';

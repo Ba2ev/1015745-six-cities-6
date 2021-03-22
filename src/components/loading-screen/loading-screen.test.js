@@ -9,3 +9,9 @@ it(`LoadingScreen should render correctly`, () => {
 
   expect(mainText).toBeInTheDocument();
 });
+
+it(`LoadingScreen should render snapshot correctly`, () => {
+  const {container} = render(<LoadingScreen />);
+
+  expect(container).toMatchSnapshot();
+});

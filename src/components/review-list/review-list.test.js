@@ -38,3 +38,9 @@ it(`ReviewList should render correctly`, () => {
   expect(firstReviewUserName).toBeInTheDocument();
   expect(secondReviewUserName).toBeInTheDocument();
 });
+
+it(`ReviewList should render snapshot correctly`, () => {
+  const {container} = render(<ReviewList reviews={reviews} limit={10}/>);
+
+  expect(container).toMatchSnapshot();
+});

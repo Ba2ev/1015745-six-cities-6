@@ -152,3 +152,28 @@ it(`Cities should render correctly`, () => {
   expect(title).toBeInTheDocument();
   expect(priceLabels).toHaveLength(1);
 });
+
+it(`Cities should render snapshot correctly`, () => {
+  const history = createMemoryHistory();
+
+  const initialState = {
+    [NameSpace.DATA]: {
+      city: CITY,
+      currentSort: sortTypes.POPULAR,
+      offers,
+    },
+    [NameSpace.USER]: {
+      isAuthorized: true,
+    }
+  };
+
+  const {container} = render(
+      <redux.Provider store={mockStore(initialState)}>
+        <Router history={history}>
+          <Cities />
+        </Router>
+      </redux.Provider>
+  );
+
+  expect(container).toMatchSnapshot();
+});

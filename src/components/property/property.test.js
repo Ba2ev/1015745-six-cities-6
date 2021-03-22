@@ -293,3 +293,30 @@ it(`Property should render correctly`, () => {
 
   expect(textPrice).toBeInTheDocument();
 });
+
+it(`Property should render snapshot correctly`, () => {
+  const history = createMemoryHistory();
+
+  const initialState = {
+    [NameSpace.DATA]: {
+      currentOffer: {
+        data,
+        comments,
+        nearOffers
+      }
+    },
+    [NameSpace.USER]: {
+      isAuthorized: true
+    }
+  };
+
+  const {container} = render(
+      <redux.Provider store={mockStore(initialState)}>
+        <Router history={history}>
+          <Property />
+        </Router>
+      </redux.Provider>
+  );
+
+  expect(container).toMatchSnapshot();
+});

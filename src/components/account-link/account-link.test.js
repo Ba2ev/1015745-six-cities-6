@@ -32,3 +32,16 @@ it(`AccountLink should render correctly`, () => {
   expect(textEmail).toBeInTheDocument();
 });
 
+it(`AccountLink should render snapshot correctly`, () => {
+  const history = createMemoryHistory();
+
+  const {container} = render(
+      <redux.Provider store={mockStore({})}>
+        <Router history={history}>
+          <AccountLink account={user.email}/>
+        </Router>
+      </redux.Provider>
+  );
+
+  expect(container).toMatchSnapshot();
+});

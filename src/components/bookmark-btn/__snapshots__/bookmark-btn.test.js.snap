@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BookmarkBtn should render snapshot correctly BookmarkBtn should render snapshot correctly when card is favorite 1`] = `
+<div>
+  <button
+    class="place-card__bookmark-button place-card__bookmark-button--active button"
+    type="button"
+  >
+    <svg
+      class="place-card__bookmark-icon"
+      height="19"
+      width="18"
+    >
+      <use
+        xlink:href="#icon-bookmark"
+      />
+    </svg>
+    <span
+      class="visually-hidden"
+    >
+      In bookmarks
+    </span>
+  </button>
+</div>
+`;
+
+exports[`BookmarkBtn should render snapshot correctly BookmarkBtn should render snapshot correctly when card is unfavorite 1`] = `
+<div>
+  <button
+    class="place-card__bookmark-button  button"
+    type="button"
+  >
+    <svg
+      class="place-card__bookmark-icon"
+      height="19"
+      width="18"
+    >
+      <use
+        xlink:href="#icon-bookmark"
+      />
+    </svg>
+    <span
+      class="visually-hidden"
+    >
+      To bookmarks
+    </span>
+  </button>
+</div>
+`;

@@ -88,3 +88,23 @@ it(`PlaceCard should render correctly`, () => {
 
   expect(priceLabels).toBeInTheDocument();
 });
+
+it(`PlaceCard should render snapshot correctly`, () => {
+  const history = createMemoryHistory();
+
+  const initialState = {
+    [NameSpace.USER]: {
+      isAuthorized: true,
+    }
+  };
+
+  const {container} = render(
+      <redux.Provider store={mockStore(initialState)}>
+        <Router history={history}>
+          <PlaceCard offer={offer} cardType={cardTypes.CITIES}/>
+        </Router>
+      </redux.Provider>
+  );
+
+  expect(container).toMatchSnapshot();
+});

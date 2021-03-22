@@ -37,7 +37,7 @@ const ReviewForm = () => {
 
     const {target: form} = evt;
 
-    setReviewForm((prevCounter) => ({...prevCounter, isFormInvaild: true}));
+    setReviewForm((prevCounter) => ({...prevCounter, isFormVaild: false}));
 
     dispatch(sendComment({
       id,

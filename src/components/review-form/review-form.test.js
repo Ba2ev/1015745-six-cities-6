@@ -31,3 +31,23 @@ it(`ReviewForm should render correctly`, () => {
 
   expect(formLabel).toBeInTheDocument();
 });
+
+it(`ReviewForm should render snapshot correctly`, () => {
+  const initialState = {
+    [NameSpace.DATA]: {
+      currentOffer: {
+        data: {
+          id: 1,
+        }
+      }
+    }
+  };
+
+  const {container} = render(
+      <redux.Provider store={mockStore(initialState)}>
+        <ReviewForm />
+      </redux.Provider>
+  );
+
+  expect(container).toMatchSnapshot();
+});

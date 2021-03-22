@@ -68,3 +68,9 @@ it(`ImageList should render correctly`, () => {
 
   expect(images).toHaveLength(expectedImagesCount);
 });
+
+it(`ImageList should render snapshot correctly`, () => {
+  const {container} = render(<ImageList images={offer.images} limit={IMAGES_LIMIT}/>);
+
+  expect(container).toMatchSnapshot();
+});

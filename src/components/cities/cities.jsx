@@ -2,7 +2,7 @@ import React from 'react';
 import {useSelector} from 'react-redux';
 import {createSelector} from 'reselect';
 import {locations, mapTypes} from '../../const';
-import {sortOffers} from '../../offer';
+import {sortOffers} from '../../util/offer';
 import CitiesPlaces from '../cities-places';
 import Map from '../map';
 

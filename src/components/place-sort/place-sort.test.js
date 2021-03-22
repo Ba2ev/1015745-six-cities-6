@@ -28,3 +28,20 @@ it(`PlaceSort should render correctly`, () => {
   expect(textCapture).toBeInTheDocument();
   expect(currentSortLabels).toHaveLength(2);
 });
+
+it(`PlaceSort should render snapshot correctly`, () => {
+
+  const initialState = {
+    [NameSpace.DATA]: {
+      currentSort: sortTypes.POPULAR,
+    }
+  };
+
+  const {container} = render(
+      <redux.Provider store = {mockStore(initialState)}>
+        <PlaceSort />
+      </redux.Provider>
+  );
+
+  expect(container).toMatchSnapshot();
+});

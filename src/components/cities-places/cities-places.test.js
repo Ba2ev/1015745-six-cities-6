@@ -207,3 +207,26 @@ it(`CitiesPlaces should render correctly`, () => {
 
   expect(priceLabels).toHaveLength(offers.length);
 });
+
+it(`CitiesPlaces should render snapshot correctly`, () => {
+  const history = createMemoryHistory();
+
+  const initialState = {
+    [NameSpace.USER]: {
+      isAuthorized: true,
+    },
+    [NameSpace.DATA]: {
+      currentSort: sortTypes.POPULAR,
+    }
+  };
+
+  const {container} = render(
+      <redux.Provider store={mockStore(initialState)}>
+        <Router history={history}>
+          <CitiesPlaces city={CITY} offers={offers}/>
+        </Router>
+      </redux.Provider>
+  );
+
+  expect(container).toMatchSnapshot();
+});

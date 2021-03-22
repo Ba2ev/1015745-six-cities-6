@@ -4,7 +4,7 @@ import {data} from './data';
 import {ActionType} from '../action';
 import {fetchOffers, fetchFavoritesOffer, fetchOfferData, fetchOfferNearby, fetchOfferComments, sendComment, changeFavorite} from '../api-actions';
 import {locations, sortTypes, requests} from '../../const';
-import {updateOffers, changeFavoriteOffers} from '../../offer';
+import {updateOffers, changeFavoriteOffers} from '../../util/offer';
 
 const api = createAPI(() => {});
 

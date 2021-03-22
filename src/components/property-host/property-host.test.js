@@ -21,3 +21,9 @@ it(`PropertyHost should render correctly`, () => {
   expect(textName).toBeInTheDocument();
   expect(textDescription).toBeInTheDocument();
 });
+
+it(`PropertyHost should render snapshot correctly`, () => {
+  const {container} = render(<PropertyHost host={fakeHost.host} description={fakeHost.description}/>);
+
+  expect(container).toMatchSnapshot();
+});

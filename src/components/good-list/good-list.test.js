@@ -64,3 +64,9 @@ it(`GoodList should render correctly`, () => {
 
   expect(title).toBeInTheDocument();
 });
+
+it(`GoodList should render snapshot correctly`, () => {
+  const {container} = render(<GoodList goods = {offer.goods}/>);
+
+  expect(container).toMatchSnapshot();
+});

@@ -19,7 +19,7 @@ const RoomPage = ({id}) => {
     dispatch(fetchOfferData(id));
     dispatch(fetchOfferComments(id));
     dispatch(fetchOfferNearby(id));
-  }, [isLoaded]);
+  }, [id, isLoaded]);
 
   return (
     <div className="page">

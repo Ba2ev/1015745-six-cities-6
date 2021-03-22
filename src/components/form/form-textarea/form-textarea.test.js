@@ -18,3 +18,13 @@ it(`TextArea should render correctly`, () => {
 
   expect(screen.getByDisplayValue(/test/i)).toBeInTheDocument();
 });
+
+it(`TextArea should render snapshot correctly`, () => {
+  const handler = jest.fn();
+
+  const {container} = render(
+      <FormTextArea handler={handler}/>
+  );
+
+  expect(container).toMatchSnapshot();
+});

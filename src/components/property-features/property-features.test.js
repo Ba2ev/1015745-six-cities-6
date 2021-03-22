@@ -70,3 +70,11 @@ it(`PropertyFeatures should render correctly`, () => {
   expect(textBedrooms).toBeInTheDocument();
   expect(textMaxAdults).toBeInTheDocument();
 });
+
+it(`PropertyFeatures should render snapshot correctly`, () => {
+  const {container} = render(<PropertyFeatures type={offer.type}
+    bedrooms={offer.bedrooms}
+    maxAdults={offer.maxAdults} />);
+
+  expect(container).toMatchSnapshot();
+});

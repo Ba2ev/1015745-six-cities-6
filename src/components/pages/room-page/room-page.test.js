@@ -321,3 +321,33 @@ it(`RoomPage should render correctly`, () => {
 
   expect(textPrice).toBeInTheDocument();
 });
+
+it(`RoomPage should render snapshot correctly`, () => {
+  const history = createMemoryHistory();
+
+  const initialState = {
+    [NameSpace.DATA]: {
+      currentOffer: {
+        data,
+        isInfoLoaded: true,
+        comments,
+        isCoomentsLoaded: true,
+        nearOffers,
+        isNearbyLoaded: true,
+      }
+    },
+    [NameSpace.USER]: {
+      isAuthorized: false
+    }
+  };
+
+  const {container} = render(
+      <redux.Provider store={mockStore(initialState)}>
+        <Router history={history}>
+          <RoomPage id={String(data.id)} />
+        </Router>
+      </redux.Provider>
+  );
+
+  expect(container).toMatchSnapshot();
+});

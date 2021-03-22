@@ -199,3 +199,20 @@ it(`Map should render correctly`, () => {
 
   expect(images).toHaveLength(offers.length + 1);
 });
+
+it(`Map should render snapshot correctly`, () => {
+
+  const initialState = {
+    [NameSpace.DATA]: {
+      hoveredOffer: null,
+    }
+  };
+
+  const {container} = render(
+      <redux.Provider store={mockStore(initialState)}>
+        <Map place={placeParams} points={offers} mapType={mapTypes.MAIN}/>
+      </redux.Provider>
+  );
+
+  expect(container).toMatchSnapshot();
+});

@@ -142,3 +142,23 @@ it(`FavoriteList should render correctly`, () => {
 
   expect(priceLabels).toHaveLength(favorites.length);
 });
+
+it(`FavoriteList should render snapshot correctly`, () => {
+  const history = createMemoryHistory();
+
+  const initialState = {
+    [NameSpace.USER]: {
+      isAuthorized: true,
+    }
+  };
+
+  const {container} = render(
+      <redux.Provider store={mockStore(initialState)}>
+        <Router history={history}>
+          <FavoriteList offers={favorites}/>
+        </Router>
+      </redux.Provider>
+  );
+
+  expect(container).toMatchSnapshot();
+});

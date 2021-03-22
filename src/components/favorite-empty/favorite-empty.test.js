@@ -9,3 +9,9 @@ it(`FavoriteEmpty should render correctly`, () => {
 
   expect(textHeader).toBeInTheDocument();
 });
+
+it(`FavoriteEmpty should render snapshot correctly`, () => {
+  const {container} = render(<FavoriteEmpty />);
+
+  expect(container).toMatchSnapshot();
+});

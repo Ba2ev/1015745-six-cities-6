@@ -39,3 +39,25 @@ describe(`Rating should render correctly`, () => {
   });
 });
 
+describe(`Rating should render snapshots correctly`, () => {
+  it(`Rating should render snapshot correctly by card type`, () => {
+
+    const {container} = render(<Rating rating = {RATING} type={ratingTypes.CARD}/>);
+
+    expect(container).toMatchSnapshot();
+  });
+
+  it(`Rating should render snapshot correctly by property type`, () => {
+
+    const {container} = render(<Rating rating = {RATING} type={ratingTypes.PROPERTY} isValueShowed/>);
+
+    expect(container).toMatchSnapshot();
+  });
+
+  it(`Rating should render snapshot correctly by review type`, () => {
+
+    const {container} = render(<Rating rating = {RATING} type={ratingTypes.REVIEW}/>);
+
+    expect(container).toMatchSnapshot();
+  });
+});

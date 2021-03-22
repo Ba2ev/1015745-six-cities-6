@@ -9,3 +9,9 @@ it(`CitiesEmpty should render correctly`, () => {
 
   expect(textHeader).toBeInTheDocument();
 });
+
+it(`CitiesEmpty should render snapshot correctly`, () => {
+  const {container} = render(<CitiesEmpty />);
+
+  expect(container).toMatchSnapshot();
+});

@@ -17,3 +17,15 @@ it(`Footer should render correctly`, () => {
 
   expect(image).toBeInTheDocument();
 });
+
+it(`Footer should render snapshot correctly`, () => {
+  const history = createMemoryHistory();
+
+  const {container} = render(
+      <Router history={history}>
+        <Footer />
+      </Router>
+  );
+
+  expect(container).toMatchSnapshot();
+});

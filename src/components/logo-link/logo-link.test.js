@@ -18,3 +18,15 @@ it(`LogoLink should render correctly`, () => {
 
   expect(image).toBeInTheDocument();
 });
+
+it(`LogoLink should render snapshot correctly`, () => {
+  const history = createMemoryHistory();
+
+  const {container} = render(
+      <Router history={history}>
+        <LogoLink linkType={logoLinkTypes.HEADER}/>
+      </Router>
+  );
+
+  expect(container).toMatchSnapshot();
+});

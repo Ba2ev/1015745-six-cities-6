@@ -10,3 +10,9 @@ it(`PremiumMark should render correctly`, () => {
 
   expect(markText).toBeInTheDocument();
 });
+
+it(`PremiumMark should render snapshot correctly`, () => {
+  const {container} = render(<PremiumMark type={markPremiumTypes.CARD}/>);
+
+  expect(container).toMatchSnapshot();
+});

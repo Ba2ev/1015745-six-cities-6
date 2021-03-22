@@ -122,13 +122,11 @@ const fakeUnfavoriteOffer = {
 };
 
 const mockStore = configureStore({});
-
+const initialState = {[NameSpace.USER]: {isAuthorized: true}};
+jest.spyOn(redux, `useSelector`);
+jest.spyOn(redux, `useDispatch`);
 describe(`BookmarkBtn should render correctly`, () => {
 
-  const initialState = {[NameSpace.USER]: {isAuthorized: true}};
-
-  jest.spyOn(redux, `useSelector`);
-  jest.spyOn(redux, `useDispatch`);
   it(`BookmarkBtn should render correctly when card is favorite`, () => {
 
     const {getByText} = render(
@@ -156,3 +154,27 @@ describe(`BookmarkBtn should render correctly`, () => {
   });
 });
 
+describe(`BookmarkBtn should render snapshot correctly`, () => {
+
+  it(`BookmarkBtn should render snapshot correctly when card is favorite`, () => {
+
+    const {container} = render(
+        <redux.Provider store={mockStore(initialState)}>
+          <BookmarkBtn btnType={bookmarkBtnTypes.PLACES} id={fakeFavoriteOffer.id} isFavorite={fakeFavoriteOffer.isFavorite}/>
+        </redux.Provider>
+    );
+
+    expect(container).toMatchSnapshot();
+  });
+
+  it(`BookmarkBtn should render snapshot correctly when card is unfavorite`, () => {
+
+    const {container} = render(
+        <redux.Provider store={mockStore(initialState)}>
+          <BookmarkBtn btnType={bookmarkBtnTypes.PLACES} id={fakeUnfavoriteOffer.id} isFavorite={fakeUnfavoriteOffer.isFavorite}/>
+        </redux.Provider>
+    );
+
+    expect(container).toMatchSnapshot();
+  });
+});

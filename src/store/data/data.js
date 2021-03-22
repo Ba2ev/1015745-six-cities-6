@@ -1,7 +1,7 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {updateCity, updateHoveredOfferId, loadOffers, loadFavoritesOffer, updateOfferFavorite, updateSort, loadOfferData, loadOfferComments, loadOfferNearby} from '../action';
 import {locations, sortTypes} from '../../const';
-import {updateOffers, changeFavoriteOffers, updateCurrentOffer} from '../../offer';
+import {updateOffers, changeFavoriteOffers, updateCurrentOffer} from '../../util/offer';
 
 const initialState = {
   city: locations[0].name,

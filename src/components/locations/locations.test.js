@@ -30,3 +30,19 @@ it(`Locations should render correctly`, () => {
   expect(currentCity).toBeInTheDocument();
   expect(currentCity.closest(`.tabs__item`)).toHaveClass(`tabs__item--active`);
 });
+
+it(`Locations should render snapshot correctly`, () => {
+  const initialState = {
+    [NameSpace.DATA]: {
+      city: fakeCurrentCity,
+    }
+  };
+
+  const {container} = render(
+      <redux.Provider store={mockStore(initialState)}>
+        <Locations />
+      </redux.Provider>
+  );
+
+  expect(container).toMatchSnapshot();
+});

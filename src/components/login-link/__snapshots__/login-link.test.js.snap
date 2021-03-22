@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginLink should render snapshot correctly 1`] = `
+<div>
+  <a
+    class="header__nav-link header__nav-link--profile"
+    href="/login"
+  >
+    <div
+      class="header__avatar-wrapper user__avatar-wrapper"
+    />
+    <span
+      class="header__login"
+    >
+      Sign in
+    </span>
+  </a>
+</div>
+`;

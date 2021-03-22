@@ -205,3 +205,23 @@ it(`NearPlaces should render correctly`, () => {
 
   expect(title).toBeInTheDocument();
 });
+
+it(`NearPlaces should render snapshot correctly`, () => {
+  const history = createMemoryHistory();
+
+  const initialState = {
+    [NameSpace.USER]: {
+      isAuthorized: true,
+    }
+  };
+
+  const {container} = render(
+      <redux.Provider store={mockStore(initialState)}>
+        <Router history={history}>
+          <NearPlaces offers={nearbyOffers}/>
+        </Router>
+      </redux.Provider>
+  );
+
+  expect(container).toMatchSnapshot();
+});
